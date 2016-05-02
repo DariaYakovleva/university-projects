@@ -1,0 +1,21 @@
+main =>
+     N = read_int(),
+     D = read_int(),
+     X1 = -1,
+     Y1 = -1,
+     foreach(X in 1..2010)
+     	foreach(Y in X..2010)
+     		if X * Y - X - Y == D + N - 2 then
+     			X1 := X,
+     			Y1 := Y
+     		end
+     	end
+     end,
+     foreach(I in 1..N-2)
+     	printf("%d ", 1)
+     end,
+     if X1 < Y1 then
+     	printf("%d %d\n", X1, Y1)
+     else
+     	printf("%d %d\n", Y1, X1)
+     end.

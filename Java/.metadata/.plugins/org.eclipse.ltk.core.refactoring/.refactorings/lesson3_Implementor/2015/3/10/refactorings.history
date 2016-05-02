@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;Implementor.getAbstractMethods(...)&apos; to &apos;getMethods&apos;&#x0D;&#x0A;- Original project: &apos;lesson3_Implementor&apos;&#x0D;&#x0A;- Original element: &apos;Implementor.getAbstractMethods(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;Implementor.getMethods(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;getAbstractMethods&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{Implementor.java[Implementor~getAbstractMethods~QClass\&lt;*&gt;;~QSet\&lt;QString;&gt;;" name="getMethods" references="true" stamp="1425560863197" version="1.0"/>
+</session>

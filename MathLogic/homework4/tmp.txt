@@ -1,0 +1,26 @@
+					int forall = forAllRule(exp, exprs);
+					if (forall != -1) {
+						Implication exp2 = (Implication)exp;
+						Quant q = (Quant)exp2.rightArg();
+						Expression a = alpha;
+						Expression c = q.getExpr();
+						Expression b = exp2.leftArg();
+						Variable d = q.getVar();
+						try {
+							BufferedReader in = new BufferedReader(new FileReader("deduction/forall.txt"));
+							String tmp = "";
+							while ((tmp = in.readLine()) != null) {
+								tmp = tmp.replaceAll("A", "QQ99");
+								tmp = tmp.replaceAll("B", "WW88");
+								tmp = tmp.replaceAll("C", "XX77");
+								tmp = tmp.replaceAll("d", "ZZ66");
+								tmp = tmp.replaceAll("QQ99", "(" + a.printExp() + ")");
+								tmp = tmp.replaceAll("WW88", "(" + b.printExp() + ")");
+								tmp = tmp.replaceAll("XX77", "(" + c.printExp() + ")");
+								tmp = tmp.replaceAll("ZZ66", d.printExp());
+								statements.add(ExpressionParser.parse(tmp));
+							}
+							in.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}

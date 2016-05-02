@@ -1,0 +1,215 @@
+import info.kgeorgiy.java.advanced.implementor.ImplerException;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+
+public class Implementor implements
+info.kgeorgiy.java.advanced.implementor.Impler {
+	/**
+	 * @version 1.0
+	 */
+	static Writer writer;
+	static Class<?> myClass;
+	static String className;
+
+	@Override
+	public void implement(Class<?> arg0, File arg1) throws ImplerException {
+		try {
+			if (Modifier.isFinal(arg0.getModifiers())) {
+				throw new ImplerException("can't extend final class");
+			}
+			String pack = "";
+			if (arg0.getPackage() != null) {
+				pack = arg0.getPackage().getName().replace(".", File.separator);
+			}
+			File folder = new File(arg1, pack);
+			if (!folder.exists() && !folder.mkdirs()) {
+				throw new ImplerException("folder hasn't been created");
+			}
+			myClass = arg0;
+			className = myClass.getSimpleName() + "Impl";
+			File file = new File(folder, className + ".java");
+			writer = Files.newBufferedWriter(Paths.get(file.getAbsolutePath()));
+			createJavaCode();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			// System.out.println("Writer exception");
+		}
+	}
+
+	static String getModifiers(int m) {
+		return Modifier.toString(m & ~Modifier.TRANSIENT & ~Modifier.ABSTRACT) + " ";
+	}
+
+	static String getType(Class<?> myClass) {
+		String type = "";
+		while (myClass.isArray()) {
+			type += "[]";
+			myClass = myClass.getComponentType();
+		}
+		return myClass.getTypeName() + type;
+	}
+
+	static String getParameters(Class<?>[] params, boolean varArg) {
+		String s = "";
+		for (int i = 0; i < params.length; i++) {
+			if (i > 0)
+				s += ", ";
+			if (i == params.length - 1 && varArg) {
+				s += getType(params[i].getComponentType()) + "... param" + i;
+				break;
+			}
+			s += getType(params[i]) + " param" + i;
+		}
+		return s;
+	}
+
+	static String printExcepts(Class<?>[] excepts) {
+		if (excepts.length == 0) {
+			return "";
+		}
+		String s = " throws ";
+		for (int i = 0; i < excepts.length; i++) {
+			if (i > 0) {
+				s += ", ";
+			}
+			s += excepts[i].getName();
+		}
+		return s;
+	}
+
+	static String valueOfMethod(Method met) {
+		String s = "return ";
+		// Boolean.TYPE, Character.TYPE, Byte.TYPE, Short.TYPE, Integer.TYPE,
+		// Long.TYPE, Float.TYPE, Double.TYPE, Void.TYPE
+		if (met.getReturnType().isPrimitive()) {
+			if (met.getReturnType() == Boolean.TYPE) {
+				s += "false";
+			} else if (met.getReturnType().equals(Void.TYPE)) {
+				return "";
+			} else {
+				s += "0";
+			}
+		} else {
+			s += "null";
+		}
+		return s + ";";
+	}
+
+	public static void printMethod(Method m) throws IOException {
+		Annotation[] annotations = m.getDeclaredAnnotations();
+		writer.write("\t");
+		for (Annotation a : annotations)
+			writer.write("@" + a.annotationType().getSimpleName() + " ");
+		writer.write("\n");
+		writer.write("\t" + getModifiers(m.getModifiers())
+				+ getType(m.getReturnType()) + " " + m.getName() + "(");
+		writer.write(getParameters(m.getParameterTypes(), m.isVarArgs()));
+		writer.write(")");
+		writer.write(printExcepts(m.getExceptionTypes()));
+		writer.write(" {\n\t\t" + valueOfMethod(m) + "\n\t}\n");
+	}
+
+	private static String identMethod(Method m) {
+		return m.getName() + "("
+				+ getParameters(m.getParameterTypes(), m.isVarArgs()) + ")";
+	}
+
+	static public void getMethods(Class<?> c, Set<String> methods)
+			throws IOException {
+		if (c == null) {
+			return;
+		}
+		Method[] meth = c.getDeclaredMethods();
+		for (Method m : meth) {
+			if (!methods.contains(identMethod(m))) {
+				if (Modifier.isAbstract(m.getModifiers())) {
+					printMethod(m);
+				}
+				methods.add(identMethod(m));
+			}
+		}
+		getMethods(c.getSuperclass(), methods);
+		for (Class<?> cc : c.getInterfaces()) {
+			getMethods(cc, methods);
+		}
+	}
+
+	public static void createJavaCode() throws IOException, ImplerException {
+		Package pack = myClass.getPackage();
+		if (pack != null) {
+			writer.write("package " + pack.getName() + ";\n");
+		}
+		writer.write("public class " + className + " ");
+		if (myClass.isInterface()) {
+			writer.write("implements " + myClass.getSimpleName());
+		} else {
+			writer.write("extends " + myClass.getSimpleName());
+		}
+		writer.write(" {\n");
+		try {
+			if (Modifier.isPrivate(myClass.getDeclaredConstructor().getModifiers())) {
+				throw new NoSuchMethodException();
+			}
+		} catch (NoSuchMethodException e) {
+			boolean haveC = false;
+			for (Constructor<?> c : myClass.getDeclaredConstructors())
+				if (!Modifier.isPrivate(c.getModifiers())) {
+					writer.write("\t" + getModifiers(c.getModifiers())
+							+ className + " (");
+					writer.write(getParameters(c.getParameterTypes(),
+							c.isVarArgs()));
+					writer.write(")");
+					writer.write(printExcepts(c.getExceptionTypes()));
+					writer.write("{\n\t\tsuper(");
+					for (int i = 0; i < c.getParameterCount(); i++) {
+						writer.write("param" + i + ((i < c.getParameterCount() - 1)?", ":");"));
+					}
+					writer.write("\n\t}\n");
+					haveC = true;
+					break;
+				}
+			if (!haveC && !myClass.isInterface()) {
+				throw new ImplerException("can't create constructor");
+			}
+		}
+		getMethods(myClass, new HashSet<>());
+		writer.write("}\n");
+	}
+
+	public static void main(String[] args) throws ImplerException {
+		try {
+			if (args[0].equals("-jar")) {
+				myClass = Class.forName(args[1]);
+			} else {
+				myClass = Class.forName(args[0]);
+			}
+			className = myClass.getSimpleName() + "Impl";
+			writer = Files.newBufferedWriter(Paths.get(className + ".java"));
+			createJavaCode();
+			writer.close();
+			if (args[0].equals("-jar")) {
+				ZipOutputStream jarFile = new ZipOutputStream(Files.newOutputStream(Paths.get(args[2])));
+				ZipEntry impl = new ZipEntry(className + ".java");
+				jarFile.putNextEntry(impl);
+				jarFile.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+	}
+}

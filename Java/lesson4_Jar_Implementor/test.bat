@@ -1,0 +1,2 @@
+﻿
+"C:\Program Files\Java\jdk1.8.0_31\bin\java.exe" -Djava.home="C:\Program Files\Java\jdk1.8.0_31\jre" -cp bin;java-advanced-2015/artifacts/ImplementorTest.jar;java-advanced-2015/lib/* Implementor -jar java.util.Set Set.jar

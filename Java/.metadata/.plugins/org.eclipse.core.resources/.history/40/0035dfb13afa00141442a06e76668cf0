@@ -1,0 +1,313 @@
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.sql.Time;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
+
+
+public class UIFileCopy {
+
+	String fileName;
+	String directory;
+	JFrame mainFrame;
+	JProgressBar progressBar;
+	JPanel panel; 
+	JButton start;
+	JButton cancel;
+	JLabel currentFile;
+	JLabel labelTotal;
+	JLabel curTime;
+	JLabel remTime;
+	JLabel midSpeed;
+	JLabel curSpeed;
+	Loader loader;
+	Time time;
+	long speed;
+	boolean work = false;
+	boolean conti = true;
+
+	public UIFileCopy(String fileName, String to) {
+		this.fileName = fileName;
+		this.directory = to;
+		mainFrame = new JFrame("Copy file");
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		panel.add(new JLabel("FROM: " + fileName));
+		panel.add(new JLabel("TO: " + to));		
+		progressBar = new JProgressBar(0, 100);
+		progressBar.setStringPainted(true);
+		progressBar.setValue(0);
+		progressBar.setPreferredSize(new Dimension(500, 100));
+
+		start = new JButton("COPY");
+		start.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startCopy();
+			}
+		});
+		start.setPreferredSize(new Dimension(100, 50));
+		cancel = new JButton("CANCEL");
+		cancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (work) {
+					conti = false;
+					JOptionPane warning = new JOptionPane();
+					warning.setPreferredSize(new Dimension(200, 200));
+					warning.setVisible(true);
+					if (JOptionPane.showConfirmDialog(mainFrame, "Are you sure to cancel loading?") == 
+							JOptionPane.YES_OPTION) {
+						work = false;
+						loader.cancel(false);
+						//						mainFrame.setVisible(false);
+					} else {
+						conti = true;
+					}
+				}
+			}
+		});
+		cancel.setPreferredSize(new Dimension(100, 50));
+
+		labelTotal = new JLabel();
+		labelTotal.setPreferredSize(new Dimension(500, 50));
+		currentFile = new JLabel();
+		currentFile.setPreferredSize(new Dimension(500, 50));
+		panel.add(progressBar);
+		
+		JPanel bPanel = new JPanel();
+		bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.LINE_AXIS));
+		bPanel.add(start);
+		bPanel.add(cancel);
+		panel.add(bPanel);
+		
+		panel.add(currentFile);
+		panel.add(labelTotal);
+
+		JPanel tPanel = new JPanel();
+		tPanel.setLayout(new BoxLayout(tPanel, BoxLayout.LINE_AXIS));
+		curTime = new JLabel();
+		remTime = new JLabel();
+		tPanel.add(curTime);
+		tPanel.add(remTime);
+		panel.add(tPanel);
+		
+		JPanel sPanel = new JPanel();
+		sPanel.setLayout(new BoxLayout(sPanel, BoxLayout.LINE_AXIS));
+		midSpeed = new JLabel();
+		curSpeed = new JLabel();
+		sPanel.add(midSpeed);
+		sPanel.add(curSpeed);
+		panel.add(sPanel);
+
+		panel.setFont(new Font("Arial", Font.BOLD, 14));
+		mainFrame.add(panel);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.pack();
+		mainFrame.setBounds(1000, 500, 700, 500);
+		mainFrame.setVisible(true);
+	}
+
+	void startCopy() {
+		time = new Time(0);
+		curTime.setText(time.toString());
+		curTime.updateUI();
+		loader = new Loader(fileName, directory);
+		loader.addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				if ("progress".equals(evt.getPropertyName())) {
+					progressBar.setValue((int)evt.getNewValue());
+					System.out.println((int)evt.getNewValue());
+				}
+			}
+		});
+		loader.execute();
+	}
+
+	public static void main(String[] args) {
+		String fileName = args[0];
+		String to = args[1];
+		UIFileCopy fileCopy = new UIFileCopy(fileName, to);
+	}
+
+	private class Loader extends SwingWorker<String, String> {
+		String fileName;
+		String dir;
+		long total = 0;
+		long fileSize = 0;
+
+		public Loader(String from, String to) {
+			this.fileName = from;
+			this.dir = to;
+		}
+		@Override
+		protected String doInBackground() throws Exception {
+			File fileFrom = new File(fileName);
+			File dirTo = new File(dir);
+			if (!fileFrom.exists()) {
+				JOptionPane warning = new JOptionPane();
+				warning.setPreferredSize(new Dimension(300, 200));
+				JOptionPane.showMessageDialog(mainFrame, "File doesn't exist");
+				warning.setVisible(true);
+				return null;				
+			}
+			if (dirTo.isFile()) {
+				JOptionPane warning = new JOptionPane();
+				warning.setPreferredSize(new Dimension(300, 200));
+				JOptionPane.showMessageDialog(mainFrame, "Sorry, I can't copy to file");
+				warning.setVisible(true);
+				return null;
+			}
+			Files.walkFileTree(Paths.get(fileName), new MyFileVisitor(Paths.get(fileName), Paths.get(dir)));
+			return null;
+		}
+
+		void copyFile(File fFrom, File fTo) throws FileNotFoundException {
+			work = true;
+			conti = true;
+			total = 0;
+			System.out.println(fFrom.exists() + "  " + fTo.exists() + " " + fFrom.getName());
+			fileSize = fFrom.length();
+			labelTotal.setText("0" + " from " + fileSize + " bytes");
+			labelTotal.updateUI();
+			currentFile.setText("COPY " + fFrom.getName() + " TO " + fTo.getName());
+			currentFile.updateUI();
+			FileInputStream from = new FileInputStream(fFrom);
+			try {
+				FileOutputStream to = new FileOutputStream(fTo);
+				try {
+					byte[] buffer = new byte[4096];
+					int length = 1;
+					while (work && length > 0) {
+						if (conti) {
+							try {
+								long tSt = time.getTime();
+								length = from.read(buffer);
+								to.write(buffer, 0, length);
+								total += length;
+								setProgress((int)(total * 100 / fileSize));
+								labelTotal.setText(total + " from " + fileSize + " bytes");
+								labelTotal.updateUI();
+								long curS = length / (time.getTime() - tSt);
+								curSpeed.setText(curS + " bytes / second");
+								curSpeed.updateUI();
+								speed = (speed + curS) / 2;
+								midSpeed.setText(curS + " bytes / second");
+								midSpeed.updateUI();
+							} catch (IOException e) {
+								JOptionPane warning = new JOptionPane();
+								warning.setPreferredSize(new Dimension(300, 200));
+								JOptionPane.showMessageDialog(mainFrame, "Oops..error");
+								warning.setVisible(true);
+								return;
+							}
+						}
+					}
+				} finally {
+					try {
+						to.close();
+					} catch (IOException e) {
+					}
+				}
+			} finally {
+				try {
+					from.close();
+				} catch (IOException e) {
+				}
+			}
+			work = false;
+		}
+
+		private class MyFileVisitor extends SimpleFileVisitor<Path> {
+			private Path from;
+			private Path to;
+
+			public MyFileVisitor(Path from, Path to) { 
+				this.from = from; 
+				this.to = to; 
+			} 
+
+			public FileVisitResult visitFile(Path path, BasicFileAttributes fileAttributes) { 
+				Path newd = to.resolve(from.relativize(path));
+				if (newd.equals(to)) {
+					newd = newd.resolve(path.getFileName());
+				}
+				try {
+					System.out.println("FROM: " + path.toString());
+					System.out.println("TO: " + newd.toString());
+					if (newd.toFile().exists()) {
+						JOptionPane warning = new JOptionPane();
+						warning.setPreferredSize(new Dimension(200, 200));
+						warning.setVisible(true);
+						if (JOptionPane.showConfirmDialog(mainFrame, "File " + newd.getFileName().toString() + " have already existed. Do you want to overwrite it?") == 
+								JOptionPane.YES_OPTION) {
+							Files.delete(newd);
+							copyFile(path.toFile(), newd.toFile());
+						} else {
+							return FileVisitResult.SKIP_SUBTREE;
+						}
+					} else {
+						copyFile(path.toFile(), newd.toFile());
+					}
+				} catch (IOException e) { 
+					e.printStackTrace(); 
+				} 
+				return FileVisitResult.CONTINUE; 
+			} 
+
+			public FileVisitResult preVisitDirectory(Path path, BasicFileAttributes fileAttributes) { 
+				Path newd = to.resolve(from.relativize(path));
+				if (newd.toFile().exists()) {
+					JOptionPane warning = new JOptionPane();
+					warning.setPreferredSize(new Dimension(200, 200));
+					warning.setVisible(true);
+					if (JOptionPane.showConfirmDialog(mainFrame, "Directory " + newd.getFileName().toString() + " have already existed. Do you want to overwrite it?") == 
+							JOptionPane.YES_OPTION) {
+						try {
+							//								Files.createDirectory(newd, fileAttributes);
+							Files.copy(path, newd, StandardCopyOption.REPLACE_EXISTING);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} else {
+						return FileVisitResult.SKIP_SUBTREE;
+					}
+				} else {
+					try {
+						Files.copy(path, newd, StandardCopyOption.REPLACE_EXISTING);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				return FileVisitResult.CONTINUE; 
+			} 
+		}
+	}
+
+}

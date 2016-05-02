@@ -1,0 +1,110 @@
+import info.kgeorgiy.java.advanced.crawler.CachingDownloader;
+import info.kgeorgiy.java.advanced.crawler.Crawler;
+import info.kgeorgiy.java.advanced.crawler.Document;
+import info.kgeorgiy.java.advanced.crawler.Downloader;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+
+public class WebCrawler implements Crawler {
+
+	ExecutorService executor;
+	Downloader downloader;
+	CachingDownloader cachDownloader;
+
+	//	downloaders — максимальное число одновременно загружаемых страниц;
+	//	extractors — максимальное число страниц, из которых извлекаются ссылки;
+	//	perHost — максимальное число страниц, одновременно загружаемых c одного хоста. 
+	//	Для опредения хоста следует использовать метод getHost класса URLUtils из тестов. 
+
+	public WebCrawler(Downloader downloader, int downloaders, int extractors, int perHost) {
+		System.err.println(downloaders + " " + extractors);
+		executor = Executors.newFixedThreadPool(downloaders);
+		this.downloader = downloader;
+	}
+
+	@Override
+	public List<String> download(String url, int depth) throws IOException {
+		if (depth == 0) {
+			return new ArrayList<String>();
+		}
+		List<String> answer = new ArrayList<>();
+		executor.execute(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		Document doc = downloader.download(url);
+		List<String> links = doc.extractLinks();
+		for (int i = 0; i < links.size(); i++) {
+			if (!answer.contains(links.get(i))) answer.addAll(download(links.get(i), depth - 1));
+		}
+		answer.addAll(links);
+		return answer;
+	}
+
+	@Override
+	public void close() {
+		executor.shutdown();
+	}
+
+	class RecursiveWalk {
+
+		//ExecutorService executor;
+		//Downloader downloader;
+		//		List<String> result = new ArrayList<>();
+		List<String> result = new CopyOnWriteArrayList<>();
+
+		//		RecursiveWalk(ExecutorService executor, Downloader downloader) {
+		//			this.executor = executor;
+		//			this.downloader = downloader;
+		//
+		//		}
+
+		public void resursiveGo(String url, int depth) {
+			if (depth == 0) {
+				return;
+			}
+			//			List<String> answer = new ArrayList<>();
+			Future<List<String>> term = executor.submit(new Callable<List<String>>() {
+
+				@Override
+				public List<String> call() throws Exception {
+					Document doc;
+					try {
+						doc = downloader.download(url);
+						List<String> links = doc.extractLinks();
+						for (int i = 0; i < links.size(); i++) {
+							boolean go = false;
+							if (!result.contains(links.get(i))) {
+								result.add(links.get(i));
+								go = true;
+							}
+							if (go) resursiveGo(links.get(i), depth - 1);
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return url;
+				}
+			});
+		}
+
+		public List<String> getResult() {
+			return result;
+		}
+	}
+}
+
+

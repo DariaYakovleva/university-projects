@@ -1,0 +1,63 @@
+	package homework7;
+
+import java.util.ArrayList;
+
+public class Power implements Expression {
+	Expression e1;
+	Expression e2;
+	public Power(Expression e1, Expression e2) {
+		this.e1 = e1;
+		this.e2 = e2;
+	}
+	
+	public Polinom evaluate() {
+		Polinom a = evaluate();
+		Polinom b = evaluate();
+		if (b.isZero() || (a.isAtom() && a.p.x == 1)) {
+			return new Polinom(new ArrayList<Pair>(), new Const(1));
+		}
+		if (a.isZero()) {
+			return new Polinom(new ArrayList<Pair>(), new Const(0));
+		}
+		if (b.isAtom() && a.isAtom()) {
+			return new Polinom(new ArrayList<Pair>(), new Const(pow(a.p.x, b.p.x)));
+		}
+		if (a.isAtom()) {
+			return exp1(a, b);
+		}
+		if (b.isAtom()) {
+			return exp3(a, b);
+		}
+		return exp4(a, b);
+	}
+
+	public int compare(Expression b) {
+		Polinom a = evaluate();
+		Polinom bb = evaluate();
+		return a.compare(bb);
+	}
+	
+	public String printExp() {
+		return "(" + e1.printExp() + "^" + e2.printExp() + ")";
+	}
+	
+	Integer pow(Integer a, Integer b) {
+		Integer res = 1;
+		for (int i = 0; i < b; i++) {
+			res *= a;
+		}
+		return res;
+	}
+	
+	Polinom exp1(Polinom a, Polinom b) {
+		Polinom p = new Polinom();
+		if (b.getExp().compare(new Const(1)) == 0) {
+			p.push(new Power(a, b.rest()), b.getCnst());
+			return p;
+		}
+		if (b.rest().isAtom()) {
+			
+		}
+	}
+
+}

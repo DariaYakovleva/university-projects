@@ -1,0 +1,20 @@
+7
+choice 1 2 3
+leaf 2
+choice 2 4 5
+choice 1 6 7
+leaf 4
+leaf 1
+leaf 3
+
+
+7
+choice 5 2 3
+choise 6 6 7
+choise 2 4 5
+leaf 5
+leaf 2
+leaf 6
+leaf 2
+
+

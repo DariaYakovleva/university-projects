@@ -1,0 +1,17 @@
+
+public class Application implements Expression {
+  
+	Expression e1;
+	Expression e2;
+    public Application(Expression e1, Expression e2) {
+    	this.e1 = e1;
+    	this.e2 = e2;
+    }
+    
+    public String printExp() {
+    	if (e1 instanceof Variable) {
+    		return e1.printExp() + e2.printExp();
+    	} 
+    	return "(" + e1.printExp() + ") " + e2.printExp();
+	} 
+}

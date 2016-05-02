@@ -1,0 +1,97 @@
+package lesson6_ParallelMapperImpl;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+
+import info.kgeorgiy.java.advanced.mapper.ParallelMapper;
+
+public class ParallelMapperImpl implements ParallelMapper {
+	/**
+	 * @version 2.0
+	 */
+	
+	/**
+	 * Queue of threads
+	 */
+	private ThreadsQueue myThreadPool;
+	
+	/**
+	 * Constructor create new ThreadPool with cntThreads threads
+	 * @param cntThreads is count of thread
+	 */
+	public ParallelMapperImpl(int cntThreads) {
+		myThreadPool = new ThreadsQueue(cntThreads);
+	}
+	/**
+	 * Method close of threads
+	 */
+	@Override
+	public void close() throws InterruptedException {
+		myThreadPool.stopAll();
+	}
+
+	public class Counter {
+		/**
+		 * Size of list
+		 */
+		int count;
+		
+		/**
+		 * Constructor create new Counter
+		 * @param count is count of list
+		 */
+		Counter(int count) {
+			this.count = count;
+		}
+		
+		/**
+		 * Dec count
+		 */
+		void dec() {
+			count--;
+		}
+		/**
+		 * Check count is zero
+		 * @return true if count is zero and false otherwise
+		 */
+		boolean isZero() {
+			return count == 0;
+		}
+	}
+
+	@Override
+	public <T, R> List<R> map(Function<? super T, ? extends R> funct, List<? extends T> list) throws InterruptedException {
+		List<R> results = new ArrayList<>();
+		Counter counter = new Counter((int)list.size());
+		for (int i = 0; i < list.size(); i++) {
+			results.add(null);
+		}
+		for (int i = 0; i < list.size(); i++) {
+			int pos = i;
+			Runnable r = new Runnable() {
+				public void run() {
+					R elem = funct.apply(list.get(pos));
+					synchronized (results) {
+						results.set(pos, elem);
+					}
+					synchronized (counter) {
+						counter.dec();
+						if (counter.isZero()) {
+							counter.notifyAll();
+						}
+					}
+				}
+			};
+			myThreadPool.applyMap(r);
+		}
+		synchronized (counter) {
+			while (!counter.isZero()) {
+				counter.wait();
+			}
+		}
+		return results;
+	}
+
+}

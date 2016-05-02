@@ -1,0 +1,158 @@
+2 S
+S -> aA
+A -> b
+ab
+
+9 S
+S -> A
+A -> B
+B -> C
+B -> D
+B -> uB
+C -> D
+D -> E
+E -> BB
+E -> f
+ufuf
+
+6 A
+A -> B
+A -> a
+B -> C
+B -> b
+C -> DD
+C -> c
+c
+
+7 A
+A -> BC
+B -> D
+D -> Fs
+F -> 
+C -> aSa
+S -> FR
+R -> d
+sada
+
+4 A
+A -> S
+S -> 
+S -> aSb
+S -> SS
+abb
+
+
+50 P
+A -> kbh
+A -> klmo
+B -> EFFD
+C -> Mm
+C -> bJfb
+C -> L
+D -> D
+E -> DFF
+G -> 
+G -> I
+G -> bnf
+G -> nl
+G -> FD
+H -> ci
+H -> Nmpn
+H -> hdg
+H -> LeiO
+H -> daI
+I -> 
+I -> FFDD
+I -> gNO
+I -> J
+J -> kGPe
+J -> io
+J -> g
+K -> 
+K -> Pgif
+K -> POmM
+K -> dO
+L -> fgbj
+L -> HGki
+L -> okgd
+L -> M
+L -> N
+M -> ogli
+M -> dMpL
+M -> k
+M -> gGn
+N -> maed
+N -> 
+N -> c
+N -> h
+N -> m
+O -> c
+O -> caok
+O -> nh
+P -> 
+P -> f
+P -> o
+P -> cmh
+cmh
+
+
+
+
+
+4 A
+A -> S
+S -> 
+S -> aSb
+S -> SS
+aaaaaaaaaabbbbbbbbbb
+
+5 A
+A -> B
+B -> CD
+C -> E
+E ->
+D -> s
+s
+
+
+5 S
+S -> B
+B -> BB
+B -> f
+B -> EB
+E -> u
+ufuf
+
+
+
+7 A
+A -> BC
+B -> D
+D -> Fs
+F -> 
+C -> aSa
+S -> FR
+R -> d
+sada
+
+
+6 A
+A -> B
+A -> a
+B -> C
+B -> b
+C -> DD
+C -> c
+c
+
+
+
+
+
+
+3 S
+S -> D
+D -> P
+P -> a
+a
+

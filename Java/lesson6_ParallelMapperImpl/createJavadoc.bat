@@ -1,0 +1,2 @@
+﻿
+javadoc src/lesson6_ParallelMapperImpl/IterativeParallelism.java -private -link http://docs.oracle.com/javase/8/docs/api -cp bin;java-advanced-2015/artifacts/IterativeParallelismTest.jar;java-advanced-2015/artifacts/ParallelMapperTest.jar;java-advanced-2015/lib/* -d javadoc/ 2>err

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Program ProgramID="2014122401" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/1999/xhtml http://de.ifmo.ru/--schema/AcademicRM.xsd" University="НИУ ИТМО" 
+Cycle="Б.3" Component="2" SubjectCode="6" Subject ="Компьютерные сети" Src="program.pdf" Owner="105590">
+	<Head>
+		<Subfield Code="010400.62.01" Name="Математические модели и алгоритмы в разработке программного обеспечения" Degree="Бакалавр"/>
+		<ProgramAuthor AuthorPersonPosition="2" SignDate="24.12.2014"/>
+		<ProgramDepartment Department="КТ"/>		
+	</Head>
+	<Body>
+		<Target>
+Целью освоения дисциплины является достижение следующих результатов образования (РО):
+знания:
+• на уровне представлений:
+– представление об основах принципах построения сетей на основе многоуровневых
+архитектур и межсетевого взаимодействия,
+– представление об основных локальных и глобальных протоколах канального уровня,
+– представление о современных стандартах беспроводной передачи данных.,
+– представление о консорциуме Интернет 2, характеристиках разрабатываемой им сети.,
+– представление о современных стандартах беспроводной передачи данных.,
+• на уровне воспроизведения:
+– воспроизведение общих принципов работы сетевого, транспортного и прикладного
+уровня стека сетевых протоколов,
+• на уровне понимания:
+– понимание основных возможностей, принципов построения и распространенных
+архитектур современных информационных сетей„
+– знание о плезиохронной и синхронной цифровых иерархиях, их историей и
+назначениями,
+умения:
+• теоретические:
+– анализ, оценка и выбор из существующих технических систем, выбору того или иного
+технического решения в зависимости от поставленной цели,
+– выбор архитектуры компьютерной сети в зависимости от поставаленной цели,
+• практические:
+– по проектированию, развертыванию и управлению современными информационными
+сетями на основе типичного аппаратного и программного обеспечения,
+навыки:
+• навык командной работы, как на этапе проектирования, так и на этапе реализации
+компонентов информационных сетей
+		</Target>
+		<SubjectInterconnection>
+Содержание дисциплины является логическим продолжением содержания дисциплин:
+• Б.2.1.1 «Математический анализ»
+• Б.2.1.2 «Алгебра и геометрия»
+• Б.2.1.3 «Физика»
+• Б.2.2.1.4 «Математическая физика»
+• Б.2.2.1.5 «Функциональный анализ»
+• Б.2.2.1.6 «Концепции современного естествознания»
+• Б.2.2.1.7 «Численные методы»
+• Б.3.1.1 «Безопасность жизнедеятельности»
+• Б.3.1.10 «Языки программирования»
+• Б.3.1.11 «Операционные системы»
+• Б.3.1.2 «Дискретная математика»
+• Б.3.1.3 «Алгоритмы и структуры данных»
+• Б.3.1.4 «Теория формальных языков»
+• Б.3.1.5 «Методы трансляции»
+• Б.3.1.6 «Теория вероятностей и математическая статистика»
+• Б.3.1.8 «Введение в программирование и ЭВМ»
+• Б.3.1.9 «Технологии программирования»
+• Б.3.2.1.1 «Автоматное программирование»
+• Б.3.2.1.2 «Вычислительная геометрия»
+• Б.3.2.1.3 «Параллельное программирование»
+• Б.3.2.1.4 «Теория вычислительной сложности»
+• Б.3.2.2.1 «Парадигмы программирования»
+• Б.3.2.2.1 «Язык программирования Java»
+• Б.3.2.2.2 «Алгоритмы в математике»
+• Б.3.2.2.2 «Специальный семинар»
+• Б.3.2.2.5 «Практикум на ЭВМ»
+• Б.3.2.2.5 «Специальный семинар»
+• Б.5.1 «Производственная практика»
+		</SubjectInterconnection>
+		<TeachingMethods>
+
+• лекции;
+• выполнение лабораторных работ;
+• защита лабораторных работ;
+промежуточный контроль по результатам семестра по дисциплине
+• в форме устного экзамена в семестре №7;
+• в форме устного экзамена в семестре №8.
+		</TeachingMethods>
+		<Requirements>
+Необходимыми условиями для освоения дисциплины являются:
+• знания:
+– знание базовых приемов, используемых при проектировании алгоритмов и структур
+данных,
+– воспроизведение базовых алгоритмов, основанных на использовании основных
+структур данных,
+– понимание базовых структур данных и операций над ними,
+– технический английский,
+• умения:
+– особенности сетевого взаимодействия операционных систем,
+• навыки:
+– алгоритмическое мышление.
+		</Requirements>
+		<Volume>                          
+			<ProgramRow ProgramRowID="3" Name="Лекции">
+				<ProgramSemester SemesterID="7" TotalHours="34"/>
+				<ProgramSemester SemesterID="8" TotalHours="14"/>
+			</ProgramRow>
+			<ProgramRow ProgramRowID="4" Name="Лабораторные работы">
+				<ProgramSemester SemesterID="7" TotalHours="34"/>
+				<ProgramSemester SemesterID="8" TotalHours="14"/>
+			</ProgramRow>
+			<ProgramRow ProgramRowID="8" Name="Самостоятельная работа">
+				<ProgramSemester SemesterID="7" TotalHours="34"/>
+				<ProgramSemester SemesterID="8" TotalHours="40"/>
+			</ProgramRow>
+			<ProgramChecking Mark="Course(2014121603).Variable(1)" SemesterID="7">
+				<StudyWork StudyWorkType="Экзамен"/>
+			</ProgramChecking>
+			<ProgramChecking Mark="Course(2014121604).Variable(1)" SemesterID="8">
+				<StudyWork StudyWorkType="Экзамен"/>
+			</ProgramChecking>
+		</Volume>
+		<ProgramModules>
+			<ProgramModule ProgramModuleID="13" Name="Модуль 13">
+				<ModuleRating ModuleRatingID="1" RatingName="Лабораторная работа" RatingMaxValue="27"/>
+				<ModuleRating ModuleRatingID="2" RatingName="Рубежное тестирование" RatingMaxValue="10"/>
+				<ModuleRating ModuleRatingID="3" RatingName="Личностные качества" RatingMaxValue="5"/>								
+			</ProgramModule>
+			<ProgramModule ProgramModuleID="14" Name="Модуль 14">
+				<ModuleRating ModuleRatingID="1" RatingName="Лабораторная работа" RatingMaxValue="23"/>
+				<ModuleRating ModuleRatingID="2" RatingName="Рубежное тестирование" RatingMaxValue="10"/>
+				<ModuleRating ModuleRatingID="3" RatingName="Личностные качества" RatingMaxValue="5"/>								
+			</ProgramModule>
+			<ProgramModule ProgramModuleID="15" Name="Модуль 15">
+				<ModuleRating ModuleRatingID="1" RatingName="Лабораторная работа" RatingMaxValue="27"/>
+				<ModuleRating ModuleRatingID="2" RatingName="Рубежное тестирование" RatingMaxValue="10"/>
+				<ModuleRating ModuleRatingID="3" RatingName="Личностные качества" RatingMaxValue="5"/>								
+			</ProgramModule>
+			<ProgramModule ProgramModuleID="16" Name="Модуль 16">
+				<ModuleRating ModuleRatingID="1" RatingName="Лабораторная работа" RatingMaxValue="23"/>
+				<ModuleRating ModuleRatingID="2" RatingName="Рубежное тестирование" RatingMaxValue="10"/>
+				<ModuleRating ModuleRatingID="3" RatingName="Личностные качества" RatingMaxValue="5"/>								
+			</ProgramModule>
+		</ProgramModules>		
+		<Structure>
+			<Section SectionID="1" Name="Общие принципы построения сетей, физические и канальные протоколы" LectureHours="18" PracticeHours="0" LaboratoryHours="18">
+				<Data>
+Лекция 1. Среды передачи данных
+Лекция 2. Уровни модели OSI
+Лекция 3. Физические протоколы передачи данных
+Лекция 4. Канальные протоколы локальных сетей
+				</Data>
+				<ProgramLaboratory LaboratoryID="1" Name="Эмуляция топологий"/>
+				<ProgramLaboratory LaboratoryID="2" Name="Физическое кодирование сигнала"/>
+			</Section>
+
+
+
+			<Section SectionID="2" Name="Протоколы сетевого, транспортного и прикладного уровней" LectureHours="16" PracticeHours="0" LaboratoryHours="16">
+				<Data>
+Лекция 5. Архитектура стека TCP/IP. Адресная информация
+Лекция 6. Сетевой и транспортный уровень стека TCP/IP
+Лекция 7. Межсетевое взаимодействие
+Лекция 8. Прикладные протоколы стека TCP/IP
+
+				</Data>
+				<ProgramLaboratory LaboratoryID="3" Name="Настройка сети"/>
+			</Section>
+
+
+			<Section SectionID="3" Name="Иерархии" LectureHours="7" PracticeHours="0" LaboratoryHours="14">
+				<Data>
+Лекция 9. «PDH»
+Лекция 10. «SDH»
+				</Data>
+				<ProgramLaboratory LaboratoryID="4" Name="Иерархии"/>
+			</Section>
+
+			<Section SectionID="4" Name="Frame relay, ATM, VLAN, PPPoE, QoS, IPv6" LectureHours="2" PracticeHours="0" LaboratoryHours="9">
+				<Data>
+Лекция 11. Frame relay, ATM, VLAN
+Лекция 12. PPPoE, QoS, IPv6
+
+				</Data>
+				<ProgramLaboratory LaboratoryID="5" Name="IPv6"/>
+			</Section>
+
+
+			<Section SectionID="5" Name="Стандарты беспроводной передачи данных" LectureHours="5" PracticeHours="0" LaboratoryHours="5">
+				<Data>
+Лекция 13. WiFi -- IEEE 802.11
+Лекция 14. WiMAX -- IEEE 802.16e
+Лекция 15. Bluetooth -- IEEE 802.15.1
+Лекция 16. NFC - ISO 13157
+Лекция 17. LTE
+				</Data>
+				<ProgramLaboratory LaboratoryID="7" Name="CDMA"/>
+			</Section>
+		</Structure>		
+		<TrainingAids>
+
+			<Reference ReferenceID="1" Status="main">
+				<Description University="НИУ ИТМО">
+					<Data>
+						Ландау Л. Д., Лифшиц Е. М. Теоретическая физика. Т. VI. Гидродинамика. — Физматлит, 2006.
+					</Data>
+					<Author LastName="Ландау"/>
+					<Author LastName="Лифшиц"/>
+					<Title Value="Теоретическая физика. Т. VI. Гидродинамика."/>
+					<PubPlace Value="Москва"/>
+					<Publisher Value="Физматлит"/>
+					<Date Format="yyyy" Value="2006"/>
+				</Description>
+			</Reference>
+
+		</TrainingAids>
+		<TrainingEqp>
+
+1. Лекционные занятия:
+a. аудитория, оснащенная маркерной доской,
+b. комплект электронных презетраций/слайдов,
+c. презентационная техника (проектор, экран, компьютер/ноутбук).
+2. Лабораторные работы
+a. компьютерный класс.
+3. Прочее
+a. рабочее место преподавателя, оснащенное компьютером с доступом в Интернет,
+b. рабочие места студентов, оснащенные компьютерами с доступом в Интернет,
+предназначенные для работы в электронной образовательной среде.
+		</TrainingEqp>
+		<Instruction>
+			Перечень вопросов, включенных в примерную программу дисциплины, может превосходить реальные возможности их изучения в объеме часов, 
+установленных примерным учебным планом, и составлен с целью возможного их выбора и установления глубины их изучения при составлении рабочей программы вуза, 
+учитывающей содержательные разделы настоящей программы и требования к уровню подготовки выпускника в соответствии с ФГОС ВП. 
+		</Instruction>
+		<Courses>
+			<IncludeCourse Course="2014121603" SemesterID="7"/>
+			<IncludeCourse Course="2014121604" SemesterID="8"/>
+		</Courses>
+	</Body>
+</Program>

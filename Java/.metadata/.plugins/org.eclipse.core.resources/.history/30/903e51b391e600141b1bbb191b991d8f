@@ -1,0 +1,121 @@
+import info.kgeorgiy.java.advanced.crawler.CachingDownloader;
+import info.kgeorgiy.java.advanced.crawler.Crawler;
+import info.kgeorgiy.java.advanced.crawler.Document;
+import info.kgeorgiy.java.advanced.crawler.Downloader;
+import info.kgeorgiy.java.advanced.crawler.URLUtils;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+
+public class WebCrawler implements Crawler {
+
+	ExecutorService executorLinks;
+	ExecutorService executorDocs;
+	Downloader downloader;
+	CachingDownloader cachDownloader;
+	Integer perHost;
+
+
+	public WebCrawler(Downloader downloader, int downloaders, int extractors, int perHost) {
+		executorDocs = Executors.newFixedThreadPool(downloaders);
+		executorLinks = Executors.newFixedThreadPool(extractors);
+		this.downloader = downloader;
+		this.perHost = perHost;
+	}
+
+	@Override
+	public List<String> download(String url, int depth) throws IOException {
+		RecursiveWalk siteTree = new RecursiveWalk();
+		siteTree.resursiveGo(url, depth);
+		return siteTree.getResult();
+	}
+
+	@Override
+	public void close() {
+		executorDocs.shutdown();
+		executorLinks.shutdown();
+	}
+
+	class RecursiveWalk {
+
+		List<String> result = new CopyOnWriteArrayList<>();
+		Map<String, Future<Document>> documents = new ConcurrentHashMap<>();
+		Map<String, Integer> hosts = new ConcurrentHashMap<>();
+		
+		Document curD = null;
+		volatile int cnt = 1;
+		
+		public void resursiveGo(String url, int depth) {
+			System.err.println(depth + " " + url);
+			if (depth == 0) {
+				result.add(url);
+				return;
+			}
+			if (documents.containsKey(url)) {
+				return;
+			}
+			Future<Document> term = executorDocs.submit(new Callable<Document>() {
+				@Override
+				public Document call() throws Exception {
+					final Document doc;
+					try {
+						String host = URLUtils.getHost(url);
+						Integer val = hosts.get(host);
+						if (val == null) {
+							val = 0;
+							hosts.put(host, 0);
+						}
+						while (val >= perHost) {
+							val = hosts.get(host);
+						}
+						hosts.replace(host, val + 1);
+						doc = downloader.download(url);
+						val = hosts.get(host);
+						hosts.replace(host, val - 1);
+						executorLinks.submit(new Callable<List<String>>() {
+							@Override
+							public List<String> call() throws Exception {
+								System.err.println("LINKS");
+								List<String> links = doc.extractLinks();
+								for (int i = 0; i < links.size(); i++) {
+									cnt = cnt + 1;
+									resursiveGo(links.get(i), depth - 1);
+								}
+								return null;
+							}
+						});
+						return doc;
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					return null;
+				}
+			});
+			documents.put(url, term);
+			result.add(url);
+			cnt = cnt - 1;
+		}
+
+		public List<String> getResult() {
+			while (cnt > 0) {}
+			while (!documents.isEmpty()) {
+				for (String link : documents.keySet()) {
+					Future<Document> doc = documents.get(link);
+					while (!doc.isDone()) {}
+					documents.remove(link);
+				}
+			}
+			return result;
+		}
+	}
+}
+
+

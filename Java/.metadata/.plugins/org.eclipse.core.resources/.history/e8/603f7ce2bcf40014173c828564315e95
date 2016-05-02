@@ -1,0 +1,80 @@
+import info.kgeorgiy.java.advanced.hello.HelloServer;
+
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+
+public class HelloUDPServer implements HelloServer{
+//	HelloConnection server;
+	AtomicBoolean work = new AtomicBoolean();
+//	Thread serverThreads[];
+	Map<Integer, myServer> ports = new ConcurrentHashMap<>();
+	
+	public HelloUDPServer() {}
+	@Override
+	public void start(int port, int threads) {
+		ports.put(port, new myServer(new HelloConnection(port), new Boolean(false), threads));
+		serverThreads = new Thread[threads];
+		this.port = port;
+		server = new HelloConnection(port);
+		for (int i = 0; i < serverThreads.length; i++) {
+			serverThreads[i] = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					while (work.get()) {
+						DatagramPacket rPacket;	
+						synchronized (server) {
+							rPacket = server.receivePacket();	
+						}
+						if (rPacket != null) {
+							String message = new String(rPacket.getData(), rPacket.getOffset(), rPacket.getLength());
+							server.sendMessage(rPacket.getPort(), rPacket.getAddress(), "Hello, " + message);
+//							System.out.println("send " + rPacket.getPort() + " " + rPacket.getAddress() + message);
+						}
+					}
+				}
+			});
+			serverThreads[i].start();
+		}
+		work.set(true);
+	}
+	@Override
+	public void close() {
+		if (!work.get()) return;
+		server.close();
+		work.set(false);
+		for (int i = 0; i < serverThreads.length; i++) {
+			serverThreads[i].interrupt();
+		}
+	}
+
+	public static void main(String[] args) {
+		int curPort = Integer.parseInt(args[0]);
+		int maxThreads = Integer.parseInt(args[1]);
+		HelloUDPServer myServer = new HelloUDPServer();
+		try {
+			System.out.println(InetAddress.getLocalHost().getHostName() + " " + InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			System.err.println("Unknown host name");
+		}
+		myServer.start(curPort, maxThreads);
+		myServer.close();
+	}
+	
+	private class myServer {
+		public HelloConnection server;
+		public AtomicBoolean work = new AtomicBoolean();
+		public Thread serverThreads[];
+		myServer() {}
+		myServer(HelloConnection server, AtomicBoolean work, int threads) {
+			this.server = server;
+			this.work = work;
+			this.serverThreads = new Thread[threads];
+		}
+		
+	}
+}

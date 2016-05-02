@@ -1,0 +1,204 @@
+import info.kgeorgiy.java.advanced.concurrent.ScalarIP;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+
+public class IterativeParallelism {//implements ScalarIP {
+
+	public <E> E minimum(int cntThreads, List<? extends E> list, Comparator<? super E> comparator) throws InterruptedException {
+		Function<List<? extends E>, E> getMinim = new Function<List<? extends E>, E>(){
+			@Override
+			public E apply(List<? extends E> t) {
+				if (t == null) {
+					System.err.println("NULL");
+					return null;
+				}
+				E minim = t.get(0);
+				System.err.println(minim.toString());
+				for (E elem : t) {
+					if (comparator.compare(minim, elem) >= 0) {
+						minim = elem;
+					}
+				}
+				return minim;
+			}};
+			SubFun<E, E> fun = new SubFun<E, E>(cntThreads, list, getMinim);
+			fun.go();
+			List<E> results = fun.getResult();
+			for (int i = 0; i < results.size(); i++) System.err.println("res="+results.get(i));
+			return getMinim.apply(results);
+	}
+
+	public <E> E maximum(int cntThreads, List<? extends E> list, Comparator<? super E> comparator) throws InterruptedException {
+		Function<List<? extends E>, E> getMaxim = new Function< List<? extends E>, E>(){
+			@Override
+			public E apply(List<? extends E> t) {
+				if (t == null) {
+					System.err.println("NULL");
+					return null;
+				}
+				E maxim = t.get(0);
+				for (E elem : t) {
+					if (comparator.compare(maxim, elem) <= 0) {
+						maxim = elem;
+					}
+				}
+				return maxim;
+			}};
+			SubFun<E, E> fun = new SubFun<E, E>(cntThreads, list, getMaxim);
+			fun.go();
+			List<E> results = fun.getResult(); 
+			return getMaxim.apply(results);
+	}
+
+	public <E> boolean all(int cntThreads, List<? extends E> list, Predicate<? super E> predicate) throws InterruptedException {
+		Function<List<? extends E>, Integer> checkPred = new Function<List<? extends E>, Integer>(){
+			@Override
+			public Integer apply(List<? extends E> t) {
+				if (t == null) return null;
+				boolean good = true;
+				for (E elem : t) {
+					good &= predicate.test(elem);
+				}
+				if (good) {
+					return new Integer(1);
+				}
+				return new Integer(0);
+			}};
+			SubFun<E, Integer> fun = new SubFun<E, Integer>(cntThreads, list, checkPred);
+			fun.go();
+			List<Integer> result = fun.getResult();
+			for (Integer elem : result) {
+				if (elem.intValue() == 0) 
+					return false;
+			}
+			return true;
+	}
+	public <E> boolean any(int cntThreads, List<? extends E> list, Predicate<? super E> predicate) throws InterruptedException {
+		Function<List<? extends E>, Integer> checkPred = new Function<List<? extends E>, Integer>(){
+			@Override
+			public Integer apply(List<? extends E> t) {
+				if (t == null) return null;
+				boolean good = false;
+				for (E elem : t) {
+					good |= predicate.test(elem);
+				}
+				if (good) {
+					return new Integer(1);
+				}
+				return new Integer(0);
+			}};
+			SubFun<E, Integer> fun = new SubFun<E, Integer>(cntThreads, list, checkPred);
+			fun.go();
+			List<Integer> result = fun.getResult();
+			for (Integer elem : result) {
+				if (elem.intValue() == 1) 
+					return true;
+			}
+			return false;
+
+	}
+	public <E> List<E> filter(int cntThreads, List<? extends E> list, Predicate<? super E> predicate) throws InterruptedException {
+		Function<List<? extends E>, List<E>> checkPred = new Function<List<? extends E>, List<E>>(){
+			@Override
+			public List<E> apply(List<? extends E> t) {
+				if (t == null) return null;
+				List<E> res = new ArrayList<E>();
+				for (E elem : t) {
+					if (predicate.test(elem)) {
+						res.add(elem);
+					}
+				}
+				return res;
+			}};
+			SubFun<E, List<E>> fun = new SubFun<E, List<E>>(cntThreads, list, checkPred);
+			fun.go();
+			List< List<E> > result = fun.getResult();
+			List<E> ans = new ArrayList<E>();
+			for (List<E> elem : result) {
+				ans.addAll(elem);
+			}
+			return ans;
+
+	}
+	public <E> List<E> map(int cntThreads, List<? extends E> list, Function<E, E> function) {
+		Function<List<? extends E>, List<E>> checkPred = new Function<List<? extends E>, List<E>>(){
+			@Override
+			public List<E> apply(List<? extends E> t) {
+				if (t == null) return null;
+				List<E> res = new ArrayList<E>();
+				for (E elem : t) {
+					res.add(function.apply(elem));
+				}
+				return res;
+			}};
+			SubFun<E, List<E>> fun = new SubFun<E, List<E>>(cntThreads, list, checkPred);
+			fun.go();
+			List< List<E> > result = fun.getResult();
+			List<E> ans = new ArrayList<E>();
+			for (List<E> elem : result) {
+				ans.addAll(elem);
+			}
+			return ans;
+
+	}
+	public <E> String concat(int cntThreads, List<? extends E> list) {
+		Function<List<? extends E>, String> toStr = new Function<List<? extends E>, String>(){
+			@Override
+			public String apply(List<? extends E> t) {
+				if (t == null) return null;
+				String res = new String();
+				for (E elem : t) {
+					res.concat(elem.toString());
+				}
+				return res;
+			}};
+			SubFun<E, String> fun = new SubFun<E, String>(cntThreads, list, toStr);
+			fun.go();
+			List<String> result = fun.getResult();
+			String ans = new String();
+			for (String elem : result) {
+				ans.concat(elem);
+			}
+			return ans;
+	}
+}
+
+class SubFun<E, R> {
+	private List<? extends E> list;	
+	Function<List<? extends E>, R> funct;
+	Thread threads[];
+	List<R> results = new ArrayList<>();
+	int lenSublist;
+	SubFun(int cntThreads, List<? extends E> list, Function<List<? extends E>, R> funct) {
+		this.list = list;
+		this.funct = funct;
+		threads = new Thread[cntThreads];
+		lenSublist = (list.size() + cntThreads - 1) / cntThreads;
+	}
+
+	public void go() {
+		for (int i = 0; i < threads.length; i++) {
+			final List<? extends E> sl = list.subList(lenSublist * i,  Integer.min(lenSublist * (i + 1), list.size()));
+			threads[i] = new Thread(new Runnable() {
+				public void run() {
+					results.add(funct.apply(sl));
+				}
+			});
+			threads[i].start();
+		}
+	}
+	public List<R> getResult() {
+		for (int i = 0; i < threads.length; i++) {
+			try {
+				threads[i].join();
+		} catch (InterruptedException e) {
+			System.err.println("OK" + i + "! ");
+		}
+		return results;
+	}
+}

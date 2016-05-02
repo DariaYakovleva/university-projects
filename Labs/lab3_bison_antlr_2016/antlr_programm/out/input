@@ -1,0 +1,8 @@
+a = 3;
+for i in range(n):
+    print(i)
+a = readlnt()
+while (a > 0):
+   i = i + 1
+if (a > 0):
+   print('aaa')

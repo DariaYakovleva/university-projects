@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;lesson5_IterativeParallelism&apos;&#x0D;&#x0A;- Original project: &apos;lesson5_IterativeParallelism&apos;&#x0D;&#x0A;- Original element: &apos;lesson5_IterativeParallelism/src/lesson5_IterativeParallelism&apos;" description="Delete element" element1="/src&lt;lesson5_IterativeParallelism" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1426634354413" subPackages="false" version="1.0"/>
+</session>

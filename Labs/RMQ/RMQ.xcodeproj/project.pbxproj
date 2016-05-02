@@ -1,0 +1,210 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		43F6077F19100CE50053C021 /* RMQ.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43F6077E19100CE50053C021 /* RMQ.1 */; };
+		43F6078E191199070053C021 /* rmq2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43F6078D191199070053C021 /* rmq2.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		43F6077619100CE50053C021 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				43F6077F19100CE50053C021 /* RMQ.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		43F6077819100CE50053C021 /* RMQ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RMQ; sourceTree = BUILT_PRODUCTS_DIR; };
+		43F6077E19100CE50053C021 /* RMQ.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = RMQ.1; sourceTree = "<group>"; };
+		43F6078D191199070053C021 /* rmq2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rmq2.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		43F6077519100CE50053C021 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		43F6076D19100CE50053C021 = {
+			isa = PBXGroup;
+			children = (
+				43F6077B19100CE50053C021 /* RMQ */,
+				43F6077919100CE50053C021 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		43F6077919100CE50053C021 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43F6077819100CE50053C021 /* RMQ */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		43F6077B19100CE50053C021 /* RMQ */ = {
+			isa = PBXGroup;
+			children = (
+				43F6078D191199070053C021 /* rmq2.cpp */,
+				43F6077E19100CE50053C021 /* RMQ.1 */,
+			);
+			path = RMQ;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		43F6077719100CE50053C021 /* RMQ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43F6078219100CE50053C021 /* Build configuration list for PBXNativeTarget "RMQ" */;
+			buildPhases = (
+				43F6077419100CE50053C021 /* Sources */,
+				43F6077519100CE50053C021 /* Frameworks */,
+				43F6077619100CE50053C021 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RMQ;
+			productName = RMQ;
+			productReference = 43F6077819100CE50053C021 /* RMQ */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		43F6076F19100CE50053C021 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 43F6077219100CE50053C021 /* Build configuration list for PBXProject "RMQ" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 43F6076D19100CE50053C021;
+			productRefGroup = 43F6077919100CE50053C021 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				43F6077719100CE50053C021 /* RMQ */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		43F6077419100CE50053C021 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F6078E191199070053C021 /* rmq2.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		43F6078019100CE50053C021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		43F6078119100CE50053C021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		43F6078319100CE50053C021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		43F6078419100CE50053C021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		43F6077219100CE50053C021 /* Build configuration list for PBXProject "RMQ" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43F6078019100CE50053C021 /* Debug */,
+				43F6078119100CE50053C021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43F6078219100CE50053C021 /* Build configuration list for PBXNativeTarget "RMQ" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43F6078319100CE50053C021 /* Debug */,
+				43F6078419100CE50053C021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 43F6076F19100CE50053C021 /* Project object */;
+}

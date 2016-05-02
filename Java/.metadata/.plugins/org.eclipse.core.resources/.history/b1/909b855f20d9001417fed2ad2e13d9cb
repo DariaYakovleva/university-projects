@@ -1,0 +1,117 @@
+package lesson6_ParallelMapperImpl;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+
+import info.kgeorgiy.java.advanced.mapper.ParallelMapper;
+
+public class ParallelMapperImpl implements ParallelMapper {
+
+	private ThreadsQueue myThreadPool;
+	int cntThreads;
+
+	public ParallelMapperImpl(int cntThreads) {
+		this.cntThreads = cntThreads;
+		myThreadPool = new ThreadsQueue(cntThreads);
+	}
+
+	@Override
+	public void close() throws InterruptedException {
+		myThreadPool.stopAll();
+	}
+
+
+	@Override
+	public <T, R> List<R> map(Function<? super T, ? extends R> funct, List<? extends T> list) throws InterruptedException {
+		List<R> results = new ArrayList<>();
+
+		for (int i = 0; i < list.size(); i++) {
+			int pos = i;
+			Runnable r = new Runnable() {
+				public void run() {
+					results.add(funct.apply(list.get(pos)));
+					synchronized (results) {
+						results.notifyAll();
+					}
+				}
+			};
+			myThreadPool.applyMap(r);
+		}
+		synchronized (results) {
+			while (results.size() < list.size()) {
+				results.wait();
+			}
+		}
+		return results;
+
+		//		List<List<R>> results = new ArrayList<>();
+		//
+		//		for (int i = 0; i < cntThreads; i++)  {
+		//			results.add(new ArrayList<>());
+		//		}
+		//		int realCnt = cntThreads;
+		//		int lenSublist = list.size() / cntThreads;
+		//		int mod = list.size() % cntThreads;
+		//		int lpos = 0;
+		//		for (int i = 0; i < cntThreads; i++) {
+		//			if (lpos < list.size()) {
+		//				final int pos = i;
+		//				int rpos = lpos + lenSublist;
+		//				if (mod > 0) {
+		//					rpos++;
+		//					mod--;
+		//				}
+		//				final List<? extends T> sl = list.subList(lpos,  Integer.min(rpos, list.size()));
+		//				lpos = rpos;
+		//				Runnable r = new Runnable() {
+		//					public void run() {
+		//						List<R> appl = new ArrayList<>();
+		//						for (int j = 0; j < sl.size(); j++) {
+		//							appl.add(funct.apply(sl.get(j)));
+		//						}
+		//						results.set(pos, appl);
+		//						synchronized (results) {
+		//							results.notifyAll();
+		//						}
+		//					}
+		//				};
+		//				myThreadPool.applyMap(r);
+		//			} else {
+		//				realCnt = i;
+		//				break;
+		//			}
+		//		}
+		//		for (int i = 0; i < realCnt; i++) {
+		//			synchronized (results) {
+		//				while (results.get(i).isEmpty()) {
+		//					results.wait();
+		//				}
+		//			}
+		//		}
+		//		List<R> ans = new ArrayList<>();
+		//		for (int i = 0; i < cntThreads; i++) {
+		//			ans.addAll(results.get(i));
+		//		}
+		//		List<R> result = new ArrayList<>();
+		//		Runnable r = new Runnable() {
+		//			public void run() {
+		//				for (int j = 0; j < list.size(); j++) {
+		//					synchronized (result) {
+		//						result.add(funct.apply(list.get(j)));
+		//					}
+		//				}
+		//				synchronized (result) {
+		//					result.notifyAll();
+		//				}
+		//			}
+		//		};
+		//		myThreadPool.applyMap(r);
+		//		synchronized (result) {
+		//			while (result.isEmpty()) result.wait();
+		//		}
+//		return ans;
+	}
+
+}

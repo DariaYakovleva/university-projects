@@ -1,0 +1,14 @@
+import java.util.*;
+
+public class Variable implements Expression {
+
+	String c;
+
+	public Variable(String a) {
+		this.c = a;
+	}
+
+	public String printExp() {
+		return c;
+	}
+}

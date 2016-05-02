@@ -1,0 +1,16 @@
+import java.io.FileInputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+
+
+public class Homework1 {
+	public static void main(String[] args) {
+		System.setIn(new FileInputStream("HW3/input.in"));
+		System.setOut(new PrintStream("HW3/output.out"));
+		Scanner in = new Scanner(System.in);
+		String s = in.nextLine();
+		String res = LambdaParser.parse(s).getString();
+		System.out.println(res);
+		in.close();
+	}
+}

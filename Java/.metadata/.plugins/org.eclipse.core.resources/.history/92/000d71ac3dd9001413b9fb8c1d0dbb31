@@ -1,0 +1,308 @@
+package lesson6_ParallelMapperImpl;
+
+import info.kgeorgiy.java.advanced.concurrent.ListIP;
+import info.kgeorgiy.java.advanced.mapper.ParallelMapper;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+
+public class IterativeParallelism implements ListIP {
+	/**
+	 * @version 2.0
+	 */
+
+	ParallelMapper ThreadPool;
+
+	/**
+	 * Constructor create empty IterativeParallelism object
+	 */
+	public IterativeParallelism(int cntThreads, List<? extends E> list) {
+	}
+	List<List<? extends E>> getList() {
+	List<List<? extends E>> tmpList = new ArrayList<>();
+	int lenSublist = (list.size() + cntThreads - 1) / cntThreads;
+	for (int i = 0; i < cntThreads; i++) {
+		if (lenSublist * i < list.size()) {
+			final List<? extends E> sl = list.subList(lenSublist * i,  Integer.min(lenSublist * (i + 1), list.size()));
+			tmpList.add(sl);
+		}
+	}
+	}
+
+	public IterativeParallelism(ParallelMapper pm) {
+		ThreadPool = pm;
+	}
+	/**
+	 * Find minimum value from list, compare it using comparator
+	 * Use parallelism with cntThreads threads
+	 * @param cntThreads count of threads
+	 * @param list list values
+	 * @param comparator function which compare two values 
+	 * @return minimum value from list
+	 * @throws InterruptedException one of thread has interrupt
+	 */
+	@Override
+	public <E> E minimum(int cntThreads, List<? extends E> list, Comparator<? super E> comparator) throws InterruptedException {
+//		System.err.println("minimum");
+		Function<List<? extends E>, E> getMinim = new Function<List<? extends E>, E>(){
+			@Override
+			public E apply(List<? extends E> t) {
+				if (t == null) {
+					System.err.println("NULL");
+					return null;
+				}
+				E minim = t.get(0);
+				for (E elem : t) {
+					if (comparator.compare(minim, elem) > 0) {
+						minim = elem;
+					}
+				}
+				return minim;
+			}};
+			List<E> ans = new ArrayList<>();
+			List<List<? extends E>> tmpList = new ArrayList<>();
+			int lenSublist = (list.size() + cntThreads - 1) / cntThreads;
+			for (int i = 0; i < cntThreads; i++) {
+				if (lenSublist * i < list.size()) {
+					final List<? extends E> sl = list.subList(lenSublist * i,  Integer.min(lenSublist * (i + 1), list.size()));
+					tmpList.add(sl);
+				}
+			}
+			ans.addAll(ThreadPool.map(getMinim, tmpList));
+			return getMinim.apply(ans);
+	}
+
+	/**
+	 * Find maximum value from list, compare it using comparator
+	 * Use parallelism with cntThreads threads
+	 * @param cntThreads count of threads
+	 * @param list list values
+	 * @param comparator function which compare two values
+	 * @return maximum value from list 
+	 * @throws InterruptedException one of thread has interrupt
+	 */
+	@Override
+	public <E> E maximum(int cntThreads, List<? extends E> list, Comparator<? super E> comparator) throws InterruptedException {
+//		System.err.println("maximum");
+		Function<List<? extends E>, E> getMaxim = new Function<List<? extends E>, E>(){
+			@Override
+			public E apply(List<? extends E> t) {
+				if (t == null) {
+					System.err.println("NULL");
+					return null;
+				}
+				E maxim = t.get(0);
+				for (E elem : t) {
+					if (comparator.compare(maxim, elem) < 0) {
+						maxim = elem;
+					}
+				}
+				return maxim;
+			}};
+			List<E> ans = new ArrayList<>();
+			int lenSublist = (list.size() + cntThreads - 1) / cntThreads;
+			List<List<? extends E>> tmpList = new ArrayList<>();
+			for (int i = 0; i < cntThreads; i++) {
+				if (lenSublist * i < list.size()) {
+					final List<? extends E> sl = list.subList(lenSublist * i,  Integer.min(lenSublist * (i + 1), list.size()));
+					tmpList.add(sl);
+				}
+			}
+			ans.addAll(ThreadPool.map(getMaxim, tmpList));
+			return getMaxim.apply(ans);
+	}
+
+	/**
+	 * Say true if all elements from list approach to predicate and false otherwise
+	 * Use parallelism with cntThreads threads
+	 * @param cntThreads count of threads
+	 * @param list list values
+	 * @param predicate function which say approach element for template or not
+	 * @return true if all elements from list approach to predicate and false otherwise
+	 * @throws InterruptedException one of thread has interrupt
+	 */
+	@Override
+	public <E> boolean all(int cntThreads, List<? extends E> list, Predicate<? super E> predicate) throws InterruptedException {
+//		System.err.println("all");
+		Function<List<? extends E>, Integer> checkPred = new Function<List<? extends E>, Integer>(){
+			@Override
+			public Integer apply(List<? extends E> t) {
+				if (t == null) return null;
+				boolean good = true;
+				for (E elem : t) {
+					good &= predicate.test(elem);
+				}
+				if (good) {
+					return new Integer(1);
+				}
+				return new Integer(0);
+			}};
+			List<Integer> ans = new ArrayList<>();
+			int lenSublist = (list.size() + cntThreads - 1) / cntThreads;
+			List<List<? extends E>> tmpList = new ArrayList<>();
+			for (int i = 0; i < cntThreads; i++) {
+				if (lenSublist * i < list.size()) {
+					final List<? extends E> sl = list.subList(lenSublist * i,  Integer.min(lenSublist * (i + 1), list.size()));
+					tmpList.add(sl);
+				}
+			}
+			ans.addAll(ThreadPool.map(checkPred, tmpList));
+			for (Integer elem : ans) {
+				if (elem.intValue() == 0) 
+					return false;
+			}
+			return true;
+	}
+
+	/**
+	 * Return true if any element from list approach to predicate and false otherwise
+	 * Use parallelism with cntThreads threads
+	 * @param cntThreads count of threads
+	 * @param list list values
+	 * @param predicate function which say approach element for template or not
+	 * @return true if any element from list approach to predicate and false otherwise  
+	 * @throws InterruptedException one of thread has interrupt
+	 */
+	@Override	
+	public <E> boolean any(int cntThreads, List<? extends E> list, Predicate<? super E> predicate) throws InterruptedException {
+//		System.err.println("any");
+		Function<List<? extends E>, Integer> checkPred = new Function<List<? extends E>, Integer>(){
+			@Override
+			public Integer apply(List<? extends E> t) {
+				if (t == null) return null;
+				boolean good = false;
+				for (E elem : t) {
+					good |= predicate.test(elem);
+				}
+				if (good) {
+					return new Integer(1);
+				}
+				return new Integer(0);
+			}};
+			List<Integer> ans = new ArrayList<>();
+			int lenSublist = (list.size() + cntThreads - 1) / cntThreads;
+			List<List<? extends E>> tmpList = new ArrayList<>();
+			for (int i = 0; i < cntThreads; i++) {
+				if (lenSublist * i < list.size()) {
+					final List<? extends E> sl = list.subList(lenSublist * i,  Integer.min(lenSublist * (i + 1), list.size()));
+					tmpList.add(sl);
+				}
+			}
+			ans.addAll(ThreadPool.map(checkPred, tmpList));
+			for (Integer elem : ans) {
+				if (elem.intValue() == 1) 
+					return true;
+			}
+			return false;
+
+	}
+
+	/**
+	 * Return list elements which approach to predicate
+	 * Use parallelism with cntThreads threads
+	 * @param cntThreads count of threads
+	 * @param list list values
+	 * @param predicate function which say approach element for template or not
+	 * @return list elements which approach to predicate
+	 * @throws InterruptedException one of thread has interrupt
+	 */
+	@Override
+	public <E> List<E> filter(int cntThreads, List<? extends E> list, Predicate<? super E> predicate) throws InterruptedException {
+//		System.err.println("filter");
+		Function<List<? extends E>, List<E>> checkPred = new Function<List<? extends E>, List<E>>(){
+			@Override
+			public List<E> apply(List<? extends E> t) {
+				if (t == null) return null;
+				List<E> res = new ArrayList<E>();
+				for (E elem : t) {
+					if (predicate.test(elem)) {
+						res.add(elem);
+					}
+				}
+				return res;
+			}};
+			List<List<E>> ans2 = new ArrayList<>();
+			List<List<? extends E>> tmpList = new ArrayList<>();
+			int lenSublist = (list.size() + cntThreads - 1) / cntThreads;
+			for (int i = 0; i < cntThreads; i++) {
+				if (lenSublist * i < list.size()) {
+					final List<? extends E> sl = list.subList(lenSublist * i,  Integer.min(lenSublist * (i + 1), list.size()));
+					tmpList.add(sl);
+				}
+			}
+			ans2.addAll(ThreadPool.map(checkPred, tmpList));
+			List<E> ans = new ArrayList<>();
+			for (List<E> elem : ans2) {
+				ans.addAll(elem);
+			}
+			return ans;
+
+	}
+
+	/**
+	 * Return list elements which every element replace to value of function from this element
+	 * Use parallelism with cntThreads threads
+	 * @param cntThreads count of threads
+	 * @param list list values
+	 * @param function function which take element and apply it
+	 * @return list elements which every element replace to value of function from this element
+	 * @throws InterruptedException one of thread has interrupt
+	 */
+	@Override
+	public <E, U> List<U> map(int cntThreads, List<? extends E> list, Function<? super E, ? extends U> function) throws InterruptedException {
+//		System.err.println("map");
+		List<U> result = new ArrayList<>();
+		int lenSublist = (list.size() + cntThreads - 1) / cntThreads;
+		for (int i = 0; i < cntThreads; i++) {
+			if (lenSublist * i < list.size()) {
+				final List<? extends E> sl = list.subList(lenSublist * i,  Integer.min(lenSublist * (i + 1), list.size()));
+				result.addAll(ThreadPool.map(function, sl));
+			}
+		}
+		return result;
+
+	}
+
+	/**
+	 * Create string concatenate all elements from list
+	 * Use parallelism with cntThreads threads
+	 * @param cntThreads count of threads
+	 * @param list list values
+	 * @return string which concatenate all elements from list
+	 * @throws InterruptedException one of thread has interrupt
+	 */
+	@Override
+	public String concat(int cntThreads, List<?> list) throws InterruptedException {
+//		System.err.println("concat");
+		Function<List<?>, String> toStr = new Function<List<?>, String>(){
+			@Override
+			public String apply(List<?> t) {
+				if (t == null) return null;
+				String res = new String();
+				for (int i = 0; i < t.size(); i++) {
+					res = res.concat(t.get(i).toString());
+				}
+				return res;
+			}};
+			List<String> ans = new ArrayList<>();
+			int lenSublist = (list.size() + cntThreads - 1) / cntThreads;
+			List<List<?>> tmpList = new ArrayList<>();
+			for (int i = 0; i < cntThreads; i++) {
+				if (lenSublist * i < list.size()) {
+					final List<?> sl = list.subList(lenSublist * i,  Integer.min(lenSublist * (i + 1), list.size()));
+					tmpList.add(sl);
+				}
+			}
+			ans.addAll(ThreadPool.map(toStr, tmpList));
+			String result = new String();
+			for (String elem : ans) {
+				result = result.concat(elem);
+			}
+			return result;
+	}
+
+}

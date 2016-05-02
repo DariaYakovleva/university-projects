@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;arg0&apos; in &apos;Implementor.implementJar(...)&apos; to &apos;myClass&apos;&#x0D;&#x0A;- Original project: &apos;lesson4_Jar_Implementor&apos;&#x0D;&#x0A;- Original element: &apos;Implementor.implementJar(Class&lt;?&gt;, File).arg0&apos;&#x0D;&#x0A;- Renamed element: &apos;arg0&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;arg0&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Implementor.java[Implementor~implementJar~QClass\&lt;*&gt;;~QFile;@arg0!3305!3317!3314!3317!QClass\&lt;*&gt;;!0!true" name="myClass" references="true" stamp="1426169146801" version="1.0"/>
+</session>

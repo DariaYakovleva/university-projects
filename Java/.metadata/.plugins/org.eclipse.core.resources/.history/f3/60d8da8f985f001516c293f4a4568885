@@ -1,0 +1,16 @@
+package homework7;
+
+public class Pair<T extends Expression, P extends Expression> {
+	public T a;
+	public P b;
+	Pair(T a, P b) {
+		this.a = a;
+		this.b = b;
+	}
+	public T first() {
+		return a;
+	}
+	public P second() {
+		return b;
+	}
+}

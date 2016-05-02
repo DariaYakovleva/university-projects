@@ -1,0 +1,74 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class LambdaParser {
+
+	private final char LAM = '\\';
+//	private final char DOT = '.';
+	private final char OPEN = '(';
+	private final char QUOTE = '\'';
+
+	private String lexem;
+	private int nextperm;
+	Expression res;
+	private List<String> variables = new ArrayList<String>();
+	
+
+	private Expression atom() {
+		Expression a;
+		if (lexem.charAt(nextperm) >= 'a' && lexem.charAt(nextperm) <= 'z') {
+			String val = "";
+			while ((lexem.charAt(nextperm) >= 'a' && lexem.charAt(nextperm) <= 'z') || 
+					(lexem.charAt(nextperm) >= '1' && lexem.charAt(nextperm) <= '9') 
+				|| (lexem.charAt(nextperm) == QUOTE)){
+				val += lexem.charAt(nextperm);
+				nextperm++;
+			}
+			a = new Variable(val);
+			if (!variables.contains(val)) variables.add(val);
+		}  else if (lexem.charAt(nextperm) == OPEN) {
+			nextperm++;
+			a = expr();
+			nextperm++;
+		} else {
+			a = null;
+		}
+		return a;
+	}
+	
+	private Expression application() {
+		Expression a = atom();
+		while (lexem.charAt(nextperm) != LAM && lexem.charAt(nextperm) != '$') {
+			nextperm++;
+			a = new Application(a, atom());
+		}
+		return a;
+	}
+
+	private Expression expr() {
+		Expression a = application();
+		if (lexem.charAt(nextperm) == LAM) {
+			nextperm ++;
+			Expression b = new Lambda(atom(), expr());
+			if (a == null) return b;
+			a = new Application(a, b);
+		}
+		return a;
+	}
+
+	LambdaParser(String a) {
+		nextperm = 0;
+		lexem = a.replaceAll("\\s", "").concat("$");
+		res = expr();
+	}
+	
+	public List<String> getVariables() {
+		return variables;
+	}
+
+	public static Expression parse(String a) {
+		return (new LambdaParser(a)).res;
+	}
+
+}

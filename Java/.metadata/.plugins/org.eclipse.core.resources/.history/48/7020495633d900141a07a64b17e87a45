@@ -1,0 +1,80 @@
+package lesson6_ParallelMapperImpl;
+
+import java.util.LinkedList;
+
+public class ThreadsQueue {
+	
+	/**
+	 * Count of threads
+	 */
+	int cntThreads;
+	
+	/**
+	 * Array of threads
+	 */
+	PoolWorker[] threads;
+	
+	/**
+	 * Queue of threads
+	 */
+	LinkedList<Runnable> queue;
+	
+	/**
+	 * Show needs in stop all threads
+	 */
+	private volatile boolean stopThread = false;
+	
+	/**
+	 * Constructor is create ThreadQueue and starts all thread
+	 * @param cntThreads is count of threads
+	 */
+	public ThreadsQueue(int cntThreads) {
+		this.cntThreads = cntThreads;
+		threads = new PoolWorker[cntThreads];
+		queue = new LinkedList<>();
+		for (int i = 0; i < cntThreads; i++) {
+			threads[i] = new PoolWorker();
+			threads[i].start();
+		}
+	}
+	
+	public void applyMap(Runnable r) {
+		synchronized (queue) {
+			queue.addLast(r);
+			queue.notify();
+		}
+	}
+	public void stopAll() {
+		stopThread = true;
+		for (int i = 0; i < cntThreads; i++) {
+			queue.add(new Runnable() {
+				
+				@Override
+				public void run() {
+					return;
+				}
+			});
+			threads[i].interrupt();
+		}
+	}
+	
+	private class PoolWorker extends Thread {
+		public void run() {
+			Runnable r = null;
+			while (!stopThread) {
+				synchronized (queue) {
+					while (queue.isEmpty()) {
+						try {
+							queue.wait();
+						} catch (InterruptedException e) {
+						} 
+					}
+					r = (Runnable) queue.removeFirst();
+				}
+				if (r != null) r.run();
+//					System.err.println("thread"+this.getId()+" "+cntThreads);
+				
+			}
+		}
+	}
+}

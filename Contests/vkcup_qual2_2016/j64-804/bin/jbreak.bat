@@ -1,0 +1,1 @@
+"%~dp0jconsole" -js break'' exit[0

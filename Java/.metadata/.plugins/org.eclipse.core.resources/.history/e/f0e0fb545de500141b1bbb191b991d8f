@@ -1,0 +1,68 @@
+import info.kgeorgiy.java.advanced.crawler.CachingDownloader;
+import info.kgeorgiy.java.advanced.crawler.Crawler;
+import info.kgeorgiy.java.advanced.crawler.Document;
+import info.kgeorgiy.java.advanced.crawler.Downloader;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+
+public class WebCrawler implements Crawler {
+	
+	ExecutorService executor;
+	Downloader downloader;
+	CachingDownloader cachDownloader;
+	
+//	downloaders — максимальное число одновременно загружаемых страниц;
+//	extractors — максимальное число страниц, из которых извлекаются ссылки;
+//	perHost — максимальное число страниц, одновременно загружаемых c одного хоста. 
+//	Для опредения хоста следует использовать метод getHost класса URLUtils из тестов. 
+	
+	public WebCrawler(Downloader downloader, int downloaders, int extractors, int perHost) {
+		System.err.println(downloaders + " " + extractors);
+		executor = Executors.newFixedThreadPool(downloaders);
+		this.downloader = downloader;
+	}
+
+	@Override
+	public List<String> download(String url, int depth) throws IOException {
+		if (depth == 0) {
+			return new ArrayList<String>();
+		}
+		List<String> answer = new ArrayList<>();
+		executor.execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		Document doc = downloader.download(url);
+		List<String> links = doc.extractLinks();
+		for (int i = 0; i < links.size(); i++) {
+			if (!answer.contains(links.get(i))) answer.addAll(download(links.get(i), depth - 1));
+		}
+		answer.addAll(links);
+		return answer;
+	}
+
+	@Override
+	public void close() {
+		executor.shutdown();
+	}
+	
+	class RecursiveWalk {
+		
+		List<String> result = new ArrayList<>();
+		
+		public List<String> resursiveGo() {
+			return null;
+		}
+	}
+}
+
+

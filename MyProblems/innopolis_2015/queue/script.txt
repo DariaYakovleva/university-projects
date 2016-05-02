@@ -1,0 +1,3 @@
+<#list 1..100 as tmp>
+        generator_DY 100 ${tmp} 10 10 > $
+    </#list>

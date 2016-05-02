@@ -1,0 +1,68 @@
+generator_max_tests 23 10 1 10 -1 1000000000 test1 > $
+generator_max_tests 324 10 1 10 -1 -1 test1 > $
+generator_max_tests 34 10 5 10 -1 1000000000 test1 > $
+generator 12 10 10 test1 > $
+generator 13 10 100 test1 > $
+generator 15 10 1000 test1 > $
+generator_tree 43 10 20 20 test1 > $
+generator_tree 435 10 20 1000000000 test1 > $
+generator_tree 443 10 1000 1000000000 test1 > $
+generator_line 5436 10 1000000000 1000000000 test1 > $
+generator_line 5436 10 10000 100000000 test1 > $
+generator_max_tests 1 50 1 50 -1 1000000000 test2 > $
+generator_max_tests 2 50 25 50 -1 -1 test2 > $
+generator 112 50 10 test2 > $
+generator 113 50 100 test2 > $
+generator 115 50 1000 test2 > $
+generator_tree 43 50 100 10000 test2 > $
+generator_tree 45 50 1000 100 test2 > $
+generator_tree 46 50 100000 1000000000 test2 > $
+generator_line 54336 50 1000000000 1000000000 test2 > $
+generator_line 54366 50 10000 100000000 test2 > $
+
+generator_max_tests 4 3000 1 3000 -1 1 test3 > $
+generator_max_tests 5 3000 1500 3000 -1 1 test3 > $
+generator 1112 3000 1 test3 > $
+generator_tree 413 3000 100 1 test3 > $
+generator_tree 495 3000 1000000 1 test3 > $
+generator_line 54316 3000 1000000000 1 test3 > $
+generator_line 54386 3000 10000 1 test3 > $
+
+generator_max_tests 7 3000 1 3000 -1 1000000000 test4 > $
+generator_max_tests 8 3000 1500 3000 -1 -1 test4 > $
+generator 212 3000 10 test4 > $
+generator 213 3000 100 test4 > $
+generator 215 3000 1000 test4 > $
+generator_tree 4453 3000 -1 10 test4 > $
+generator_tree 4876 3000 100000 1000000000 test4 > $
+generator_line 54316 3000 1000000000 1000000000 test4 > $
+generator_line 54386 3000 20000 1000000 test4 > $
+
+generator_max_tests 10 100000 1 100000 -1 1 test5 > $
+generator_max_tests 12 100000 50000 100000 -1 1 test5 > $
+generator 2212 100000 1 test5 > $
+generator_tree 47453 100000 -1 1 test5 > $
+generator_tree 47876 100000 200000 1 test5 > $
+generator_line 4316 100000 1000000000 1 test5 > $
+generator_line 4386 100000 200000 1 test5 > $
+generator_max_tests 13 100000 1 100000 -1 1000000000 test6 > $
+generator_max_tests 15 100000 50000 100000 -1 1000000000 test6 > $
+generator 312 100000 10 test6 > $
+generator 313 100000 100 test6 > $
+generator 315 100000 1000 test6 > $
+generator_tree 474534 100000 -1 1000000000 test6 > $
+generator_tree 478765 100000 300000 100000000 test6 > $
+generator_line 54316 100000 1000000000 1000000000 test6 > $
+generator_line 54386 100000 3000000 1000000 test6 > $
+
+generator_max_tests 16 500000 1 500000 -1 1000000000 test7 > $
+generator_max_tests 18 500000 250000 500000 -1 1000000000 test7 > $
+generator 3312 500000 10 test7 > $
+generator 3313 500000 100 test7 > $
+generator 3315 500000 1000 test7 > $
+generator_tree 474584 500000 -1 1000000000 test7 > $
+generator_tree 478865 500000 1000000000 100000000 test7 > $
+generator_tree 47815 500000 1000000000 100 test7 > $
+generator_line 54316 500000 1000000000 1000000000 test7 > $
+generator_line 54386 500000 30000000 1000000 test7 > $
+

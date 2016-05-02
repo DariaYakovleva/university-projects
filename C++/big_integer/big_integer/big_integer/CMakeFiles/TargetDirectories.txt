@@ -1,0 +1,1 @@
+/home/daria/Рабочий стол/big_integer/big_integer/CMakeFiles/big_integer_testing.dir

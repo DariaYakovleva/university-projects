@@ -1,0 +1,385 @@
+main.cpp: In function 'void findClasses()':
+main.cpp:86:23: error: no matching function for call to 'swap(__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type*, __gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type*)'
+      swap(&p[i], &p[j]);
+                       ^
+main.cpp:86:23: note: candidates are:
+In file included from c:\mingw64\include\c++\4.8.3\bits\stl_pair.h:59:0,
+                 from c:\mingw64\include\c++\4.8.3\bits\stl_algobase.h:64,
+                 from c:\mingw64\include\c++\4.8.3\bits\char_traits.h:39,
+                 from c:\mingw64\include\c++\4.8.3\ios:40,
+                 from c:\mingw64\include\c++\4.8.3\istream:38,
+                 from c:\mingw64\include\c++\4.8.3\sstream:38,
+                 from c:\mingw64\include\c++\4.8.3\complex:45,
+                 from c:\mingw64\include\c++\4.8.3\ccomplex:38,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:52,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\move.h:166:5: note: void std::swap(_Tp&, _Tp&) [with _Tp = std::unordered_set<int>*]
+     swap(_Tp& __a, _Tp& __b)
+     ^
+c:\mingw64\include\c++\4.8.3\bits\move.h:166:5: note:   no known conversion for argument 1 from '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}' to 'std::unordered_set<int>*&'
+c:\mingw64\include\c++\4.8.3\bits\move.h:185:5: note: template<class _Tp, long long unsigned int _Nm> void std::swap(_Tp (&)[_Nm], _Tp (&)[_Nm])
+     swap(_Tp (&__a)[_Nm], _Tp (&__b)[_Nm])
+     ^
+c:\mingw64\include\c++\4.8.3\bits\move.h:185:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types '_Tp [_Nm]' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\bits\stl_algobase.h:64:0,
+                 from c:\mingw64\include\c++\4.8.3\bits\char_traits.h:39,
+                 from c:\mingw64\include\c++\4.8.3\ios:40,
+                 from c:\mingw64\include\c++\4.8.3\istream:38,
+                 from c:\mingw64\include\c++\4.8.3\sstream:38,
+                 from c:\mingw64\include\c++\4.8.3\complex:45,
+                 from c:\mingw64\include\c++\4.8.3\ccomplex:38,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:52,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_pair.h:254:5: note: template<class _T1, class _T2> void std::swap(std::pair<_T1, _T2>&, std::pair<_T1, _T2>&)
+     swap(pair<_T1, _T2>& __x, pair<_T1, _T2>& __y)
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_pair.h:254:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::pair<_T1, _T2>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\string:52:0,
+                 from c:\mingw64\include\c++\4.8.3\bits\locale_classes.h:40,
+                 from c:\mingw64\include\c++\4.8.3\bits\ios_base.h:41,
+                 from c:\mingw64\include\c++\4.8.3\ios:42,
+                 from c:\mingw64\include\c++\4.8.3\istream:38,
+                 from c:\mingw64\include\c++\4.8.3\sstream:38,
+                 from c:\mingw64\include\c++\4.8.3\complex:45,
+                 from c:\mingw64\include\c++\4.8.3\ccomplex:38,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:52,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\basic_string.h:2717:5: note: template<class _CharT, class _Traits, class _Alloc> void std::swap(std::basic_string<_CharT, _Traits, _Alloc>&, std::basic_string<_CharT, _Traits, _Alloc>&)
+     swap(basic_string<_CharT, _Traits, _Alloc>& __lhs,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\basic_string.h:2717:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::basic_string<_CharT, _Traits, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\vector:64:0,
+                 from c:\mingw64\include\c++\4.8.3\bits\random.h:34,
+                 from c:\mingw64\include\c++\4.8.3\random:50,
+                 from c:\mingw64\include\c++\4.8.3\bits\stl_algo.h:65,
+                 from c:\mingw64\include\c++\4.8.3\algorithm:62,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:64,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_vector.h:1452:5: note: template<class _Tp, class _Alloc> void std::swap(std::vector<_Tp, _Alloc>&, std::vector<_Tp, _Alloc>&)
+     swap(vector<_Tp, _Alloc>& __x, vector<_Tp, _Alloc>& __y)
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_vector.h:1452:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::vector<_Tp, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\vector:65:0,
+                 from c:\mingw64\include\c++\4.8.3\bits\random.h:34,
+                 from c:\mingw64\include\c++\4.8.3\random:50,
+                 from c:\mingw64\include\c++\4.8.3\bits\stl_algo.h:65,
+                 from c:\mingw64\include\c++\4.8.3\algorithm:62,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:64,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_bvector.h:112:3: note: void std::swap(std::_Bit_reference, std::_Bit_reference)
+   swap(_Bit_reference __x, _Bit_reference __y) noexcept
+   ^
+c:\mingw64\include\c++\4.8.3\bits\stl_bvector.h:112:3: note:   no known conversion for argument 1 from '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}' to 'std::_Bit_reference'
+c:\mingw64\include\c++\4.8.3\bits\stl_bvector.h:120:3: note: void std::swap(std::_Bit_reference, bool&)
+   swap(_Bit_reference __x, bool& __y) noexcept
+   ^
+c:\mingw64\include\c++\4.8.3\bits\stl_bvector.h:120:3: note:   no known conversion for argument 1 from '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}' to 'std::_Bit_reference'
+c:\mingw64\include\c++\4.8.3\bits\stl_bvector.h:128:3: note: void std::swap(bool&, std::_Bit_reference)
+   swap(bool& __x, _Bit_reference __y) noexcept
+   ^
+c:\mingw64\include\c++\4.8.3\bits\stl_bvector.h:128:3: note:   no known conversion for argument 1 from '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}' to 'bool&'
+In file included from c:\mingw64\include\c++\4.8.3\tuple:39:0,
+                 from c:\mingw64\include\c++\4.8.3\functional:55,
+                 from c:\mingw64\include\c++\4.8.3\bits\stl_algo.h:66,
+                 from c:\mingw64\include\c++\4.8.3\algorithm:62,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:64,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\array:262:5: note: template<class _Tp, long long unsigned int _Nm> void std::swap(std::array<_Tp, _Nm>&, std::array<_Tp, _Nm>&)
+     swap(array<_Tp, _Nm>& __one, array<_Tp, _Nm>& __two)
+     ^
+c:\mingw64\include\c++\4.8.3\array:262:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::array<_Tp, _Nm>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\functional:55:0,
+                 from c:\mingw64\include\c++\4.8.3\bits\stl_algo.h:66,
+                 from c:\mingw64\include\c++\4.8.3\algorithm:62,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:64,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\tuple:1048:5: note: template<class ... _Elements> void std::swap(std::tuple<_Elements ...>&, std::tuple<_Elements ...>&)
+     swap(tuple<_Elements...>& __x, tuple<_Elements...>& __y)
+     ^
+c:\mingw64\include\c++\4.8.3\tuple:1048:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::tuple<_Elements ...>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\bits\stl_algo.h:66:0,
+                 from c:\mingw64\include\c++\4.8.3\algorithm:62,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:64,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\functional:2573:5: note: template<class _Res, class ... _Args> void std::swap(std::function<_Res(_ArgTypes ...)>&, std::function<_Res(_ArgTypes ...)>&)
+     swap(function<_Res(_Args...)>& __x, function<_Res(_Args...)>& __y)
+     ^
+c:\mingw64\include\c++\4.8.3\functional:2573:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::function<_Res(_ArgTypes ...)>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\deque:64:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:67,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_deque.h:2011:5: note: template<class _Tp, class _Alloc> void std::swap(std::deque<_Tp, _Alloc>&, std::deque<_Tp, _Alloc>&)
+     swap(deque<_Tp,_Alloc>& __x, deque<_Tp,_Alloc>& __y)
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_deque.h:2011:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::deque<_Tp, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\list:63:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:78,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_list.h:1662:5: note: template<class _Tp, class _Alloc> void std::swap(std::list<_Tp, _Alloc>&, std::list<_Tp, _Alloc>&)
+     swap(list<_Tp, _Alloc>& __x, list<_Tp, _Alloc>& __y)
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_list.h:1662:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::list<_Tp, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\map:60:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:80,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_tree.h:955:5: note: template<class _Key, class _Val, class _KeyOfValue, class _Compare, class _Alloc> void std::swap(std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>&, std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>&)
+     swap(_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_tree.h:955:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\map:61:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:80,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_map.h:1014:5: note: template<class _Key, class _Tp, class _Compare, class _Alloc> void std::swap(std::map<_Key, _Tp, _Compare, _Alloc>&, std::map<_Key, _Tp, _Compare, _Alloc>&)
+     swap(map<_Key, _Tp, _Compare, _Alloc>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_map.h:1014:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::map<_Key, _Tp, _Compare, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\map:62:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:80,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_multimap.h:916:5: note: template<class _Key, class _Tp, class _Compare, class _Alloc> void std::swap(std::multimap<_Key, _Tp, _Compare, _Alloc>&, std::multimap<_Key, _Tp, _Compare, _Alloc>&)
+     swap(multimap<_Key, _Tp, _Compare, _Alloc>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_multimap.h:916:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::multimap<_Key, _Tp, _Compare, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\memory:81:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:81,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\unique_ptr.h:482:5: note: template<class _Tp, class _Dp> void std::swap(std::unique_ptr<_Tp, _Dp>&, std::unique_ptr<_Tp, _Dp>&)
+     swap(unique_ptr<_Tp, _Dp>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\unique_ptr.h:482:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::unique_ptr<_Tp, _Dp>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\bits\shared_ptr.h:52:0,
+                 from c:\mingw64\include\c++\4.8.3\memory:82,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:81,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\shared_ptr_base.h:1145:5: note: template<class _Tp, __gnu_cxx::_Lock_policy _Lp> void std::swap(std::__shared_ptr<_Tp, _Lp>&, std::__shared_ptr<_Tp, _Lp>&)
+     swap(__shared_ptr<_Tp, _Lp>& __a, __shared_ptr<_Tp, _Lp>& __b) noexcept
+     ^
+c:\mingw64\include\c++\4.8.3\bits\shared_ptr_base.h:1145:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::__shared_ptr<_Tp, _Lp>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\bits\shared_ptr.h:52:0,
+                 from c:\mingw64\include\c++\4.8.3\memory:82,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:81,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\shared_ptr_base.h:1321:5: note: template<class _Tp, __gnu_cxx::_Lock_policy _Lp> void std::swap(std::__weak_ptr<_Tp, _Lp>&, std::__weak_ptr<_Tp, _Lp>&)
+     swap(__weak_ptr<_Tp, _Lp>& __a, __weak_ptr<_Tp, _Lp>& __b) noexcept
+     ^
+c:\mingw64\include\c++\4.8.3\bits\shared_ptr_base.h:1321:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::__weak_ptr<_Tp, _Lp>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\memory:82:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:81,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\shared_ptr.h:431:5: note: template<class _Tp> void std::swap(std::shared_ptr<_Tp1>&, std::shared_ptr<_Tp1>&)
+     swap(shared_ptr<_Tp>& __a, shared_ptr<_Tp>& __b) noexcept
+     ^
+c:\mingw64\include\c++\4.8.3\bits\shared_ptr.h:431:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::shared_ptr<_Tp1>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\memory:82:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:81,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\shared_ptr.h:517:5: note: template<class _Tp> void std::swap(std::weak_ptr<_Tp>&, std::weak_ptr<_Tp>&)
+     swap(weak_ptr<_Tp>& __a, weak_ptr<_Tp>& __b) noexcept
+     ^
+c:\mingw64\include\c++\4.8.3\bits\shared_ptr.h:517:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::weak_ptr<_Tp>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\queue:64:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:85,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_queue.h:316:5: note: template<class _Tp, class _Seq> void std::swap(std::queue<_Tp, _Seq>&, std::queue<_Tp, _Seq>&)
+     swap(queue<_Tp, _Seq>& __x, queue<_Tp, _Seq>& __y)
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_queue.h:316:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::queue<_Tp, _Seq>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\queue:64:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:85,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_queue.h:555:5: note: template<class _Tp, class _Sequence, class _Compare> void std::swap(std::priority_queue<_Tp, _Sequence, _Compare>&, std::priority_queue<_Tp, _Sequence, _Compare>&)
+     swap(priority_queue<_Tp, _Sequence, _Compare>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_queue.h:555:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::priority_queue<_Tp, _Sequence, _Compare>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\set:61:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:86,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_set.h:806:5: note: template<class _Key, class _Compare, class _Alloc> void std::swap(std::set<_Key, _Compare, _Alloc>&, std::set<_Key, _Compare, _Alloc>&)
+     swap(set<_Key, _Compare, _Alloc>& __x, set<_Key, _Compare, _Alloc>& __y)
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_set.h:806:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::set<_Key, _Compare, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\set:62:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:86,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_multiset.h:791:5: note: template<class _Key, class _Compare, class _Alloc> void std::swap(std::multiset<_Key, _Compare, _Alloc>&, std::multiset<_Key, _Compare, _Alloc>&)
+     swap(multiset<_Key, _Compare, _Alloc>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_multiset.h:791:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::multiset<_Key, _Compare, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\stack:61:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:88,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\stl_stack.h:291:5: note: template<class _Tp, class _Seq> void std::swap(std::stack<_Tp, _Seq>&, std::stack<_Tp, _Seq>&)
+     swap(stack<_Tp, _Seq>& __x, stack<_Tp, _Seq>& __y)
+     ^
+c:\mingw64\include\c++\4.8.3\bits\stl_stack.h:291:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::stack<_Tp, _Seq>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\condition_variable:39:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:101,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\mutex:607:5: note: template<class _Mutex> void std::swap(std::unique_lock<_Mutex>&, std::unique_lock<_Mutex>&)
+     swap(unique_lock<_Mutex>& __x, unique_lock<_Mutex>& __y) noexcept
+     ^
+c:\mingw64\include\c++\4.8.3\mutex:607:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::unique_lock<_Mutex>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\forward_list:38:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:102,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\forward_list.h:1395:5: note: template<class _Tp, class _Alloc> void std::swap(std::forward_list<_Tp, _Alloc>&, std::forward_list<_Tp, _Alloc>&)
+     swap(forward_list<_Tp, _Alloc>& __lx,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\forward_list.h:1395:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::forward_list<_Tp, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\future:40:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:103,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\thread:200:3: note: void std::swap(std::thread&, std::thread&)
+   swap(thread& __x, thread& __y) noexcept
+   ^
+c:\mingw64\include\c++\4.8.3\thread:200:3: note:   no known conversion for argument 1 from '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}' to 'std::thread&'
+In file included from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:103:0,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\future:1007:5: note: template<class _Res> void std::swap(std::promise<_Res>&, std::promise<_Res>&)
+     swap(promise<_Res>& __x, promise<_Res>& __y) noexcept
+     ^
+c:\mingw64\include\c++\4.8.3\future:1007:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::promise<_Res>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:103:0,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\future:1428:5: note: template<class _Res, class ... _ArgTypes> void std::swap(std::packaged_task<_Res(_ArgTypes ...)>&, std::packaged_task<_Res(_ArgTypes ...)>&)
+     swap(packaged_task<_Res(_ArgTypes...)>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\future:1428:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::packaged_task<_Res(_ArgTypes ...)>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\regex:62:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:108,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\regex.h:722:5: note: template<class _Ch_type, class _Rx_traits> void std::swap(std::basic_regex<_Ch_type, _Rx_traits>&, std::basic_regex<_Ch_type, _Rx_traits>&)
+     swap(basic_regex<_Ch_type, _Rx_traits>& __lhs,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\regex.h:722:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::basic_regex<_Ch_type, _Rx_traits>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\regex:62:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:108,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\regex.h:1848:5: note: template<class _Bi_iter, class _Alloc> void std::swap(std::match_results<_FwdIterT, _Alloc>&, std::match_results<_FwdIterT, _Alloc>&)
+     swap(match_results<_Bi_iter, _Alloc>& __lhs,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\regex.h:1848:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::match_results<_FwdIterT, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\unordered_map:48:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:115,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\unordered_map.h:1376:5: note: template<class _Key, class _Tp, class _Hash, class _Pred, class _Alloc> void std::swap(std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>&, std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>&)
+     swap(unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\unordered_map.h:1376:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\unordered_map:48:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:115,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\unordered_map.h:1382:5: note: template<class _Key, class _Tp, class _Hash, class _Pred, class _Alloc> void std::swap(std::unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>&, std::unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>&)
+     swap(unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\unordered_map.h:1382:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\unordered_set:48:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:116,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\unordered_set.h:1259:5: note: template<class _Value, class _Hash, class _Pred, class _Alloc> void std::swap(std::unordered_set<_Value, _Hash, _Pred, _Alloc>&, std::unordered_set<_Value, _Hash, _Pred, _Alloc>&)
+     swap(unordered_set<_Value, _Hash, _Pred, _Alloc>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\unordered_set.h:1259:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::unordered_set<_Value, _Hash, _Pred, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^
+In file included from c:\mingw64\include\c++\4.8.3\unordered_set:48:0,
+                 from c:\mingw64\include\c++\4.8.3\x86_64-w64-mingw32\bits\stdc++.h:116,
+                 from main.cpp:1:
+c:\mingw64\include\c++\4.8.3\bits\unordered_set.h:1265:5: note: template<class _Value, class _Hash, class _Pred, class _Alloc> void std::swap(std::unordered_multiset<_Value, _Hash, _Pred, _Alloc>&, std::unordered_multiset<_Value, _Hash, _Pred, _Alloc>&)
+     swap(unordered_multiset<_Value, _Hash, _Pred, _Alloc>& __x,
+     ^
+c:\mingw64\include\c++\4.8.3\bits\unordered_set.h:1265:5: note:   template argument deduction/substitution failed:
+main.cpp:86:23: note:   mismatched types 'std::unordered_multiset<_Value, _Hash, _Pred, _Alloc>' and '__gnu_cxx::__alloc_traits<std::allocator<std::unordered_set<int> > >::value_type* {aka std::unordered_set<int>*}'
+      swap(&p[i], &p[j]);
+                       ^

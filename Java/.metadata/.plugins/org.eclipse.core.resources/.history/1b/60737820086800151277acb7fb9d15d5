@@ -1,0 +1,136 @@
+package homework7;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Polinom implements Expression{
+	public List<Pair> polinom;
+	public Const p;
+//	public Pair cnt;
+//	public Polinom next;
+	
+	public Polinom() {
+		polinom = new ArrayList<Pair>();
+		p = null;
+	}
+	
+	public Polinom(List<Pair> a, Const p) {
+		this.p = p;
+		polinom = new ArrayList<Pair>();
+		for (int i = 0; i < a.size(); i++) {
+			polinom.add(new Pair(a.get(i)));
+		}
+	}
+	
+	public Polinom(Polinom a) {
+		new Polinom(a.polinom, a.p);
+	}
+	
+
+	int size() {
+		int x = 0;
+		if (p != null) x++;
+		return polinom.size() + x;
+	}
+	
+	void push(Polinom power, Const mult) {
+		polinom.add(new Pair(mult, power));
+	}
+	
+	public Expression getExp() {
+		return polinom.get(0).getExp();
+	}
+	public Const getCnst() {
+		return polinom.get(0).getCnst();
+	}
+	
+	public Polinom add(Polinom a) {
+		Polinom res = new Polinom(this);
+		res.polinom.addAll(a.polinom);
+		res.p = a.p;
+		return res;
+	}
+	
+	public Polinom first() {
+		if (polinom.isEmpty()) {
+			return p.evaluate();
+		}
+		return new Polinom(polinom.subList(0, 1), p);
+	}
+	
+	public Polinom rest() {
+		if (polinom.isEmpty()) {
+			return p.evaluate();
+		}
+		return new Polinom(polinom.subList(1, polinom.size()), p);
+	}
+	
+	public Polinom firstn(int n) {
+		if (n == 0) {
+			return null;
+		}
+		return first().add(rest().firstn(n - 1));
+	}
+	
+	public Polinom restn(int n) {
+		if (n == 0) {
+			return new Polinom(this);
+		}
+		return rest().restn(n - 1);
+	}
+	
+	public Polinom append(Polinom b) {
+		if (isAtom()) {
+			return b;
+		}
+		return first().add(rest().append(b));
+	}
+
+	public boolean isAtom() {
+		if (polinom.isEmpty() && p != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isZero() {
+		return polinom.isEmpty() && p.x == 0;
+	}
+	
+	@Override
+	public Polinom evaluate() {
+		return this;
+	}
+	
+	public int compare(Expression b) {
+		if (!(b instanceof Polinom)) {
+			return 1;
+		}
+		Polinom c = (Polinom)b;
+		if (isAtom() && c.isAtom()) {
+			return p.compare(c.p);
+		}
+		if (isAtom()) return -1;
+		if (c.isAtom()) return 1;
+		int exp = getExp().compare(c.getExp());
+		int cnst = getCnst().compare(c.getCnst());
+		if (exp != 0) 
+			return exp;
+		if (cnst != 0) {
+			return cnst;
+		}
+		Polinom p1 = rest();
+		Polinom p2 = c.rest();
+		return p1.compare(p2);
+	}
+
+	@Override
+	public String printExp() {
+		String res = "";
+		for (int i = polinom.size() - 1; i >= 0; i--) {
+			res += "(" + polinom.get(i).getCnst().printExp() + ") * w ^ (" + polinom.get(i).getExp().printExp() + ") ";
+			if (i > 0) res += "+ ";
+		}
+		return res;
+	}
+}

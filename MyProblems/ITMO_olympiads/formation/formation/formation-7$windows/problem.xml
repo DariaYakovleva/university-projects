@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="7" short-name="formation" url="https://polygon.codeforces.com/p/DariaYakovleva/formation">
+    <names>
+        <name language="russian" value="Шеренга"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="russian" path="statements/russian/problem.tex" type="application/x-tex"/>
+        <statement language="russian" path="statements/.pdf/russian/problem.pdf" type="application/pdf"/>
+    </statements>
+    <judging cpu-name="Intel(R) Core(TM) i5-3470 CPU @ 3.20GHz" cpu-speed="3600" input-file="formation.in" output-file="formation.out">
+        <testset name="tests">
+            <time-limit>2000</time-limit>
+            <memory-limit>67108864</memory-limit>
+            <test-count>38</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test group="1" method="manual" sample="true"/>
+                <test group="1" method="manual"/>
+                <test group="1" method="manual"/>
+                <test group="1" method="manual"/>
+                <test group="1" method="manual"/>
+                <test group="1" method="manual"/>
+                <test group="1" method="manual"/>
+                <test group="1" method="manual"/>
+                <test cmd="generator_DY 153 20 15" group="1" method="generated"/>
+                <test cmd="generator_DY 162 30 16" group="1" method="generated"/>
+                <test cmd="generator_DY 1731 40 37" group="1" method="generated"/>
+                <test cmd="generator_DY 1834 50 38" group="1" method="generated"/>
+                <test cmd="generator_DY 21423 80 61" group="1" method="generated"/>
+                <test cmd="generator_DY 2323 99 98" group="1" method="generated"/>
+                <test cmd="generator_DY 234 100 96" group="1" method="generated"/>
+                <test cmd="generator_DY 5350 750 550" group="2" method="generated"/>
+                <test cmd="generator_DY 5541 760 351" group="2" method="generated"/>
+                <test cmd="generator_DY 5650 700 698" group="2" method="generated"/>
+                <test cmd="generator_DY 5667 800 669" group="2" method="generated"/>
+                <test cmd="generator_DY 5667 900 767" group="2" method="generated"/>
+                <test cmd="generator_DY 5667 1000 800" group="2" method="generated"/>
+                <test cmd="generator_DY 5667 1000 1000" group="2" method="generated"/>
+                <test cmd="generator_DY 5667 800 367" group="2" method="generated"/>
+                <test group="2" method="manual"/>
+                <test group="2" method="manual"/>
+                <test group="2" method="manual"/>
+                <test cmd="generator_DY 900000 1000000 900000" group="3" method="generated"/>
+                <test cmd="generator_DY 900001 1000000 900001" group="3" method="generated"/>
+                <test cmd="generator_DY 900005 1000000 900005" group="3" method="generated"/>
+                <test cmd="generator_DY 900006 1000000 900006" group="3" method="generated"/>
+                <test cmd="generator_DY 900020 1000000 900020" group="3" method="generated"/>
+                <test cmd="generator_DY 900026 1000000 900026" group="3" method="generated"/>
+                <test cmd="generator_DY 900027 1000000 900027" group="3" method="generated"/>
+                <test cmd="generator_DY 900028 1000000 900028" group="3" method="generated"/>
+                <test cmd="generator_DY 900029 1000000 900029" group="3" method="generated"/>
+                <test cmd="generator_DY 900030 1000000 900030" group="3" method="generated"/>
+                <test group="3" method="manual"/>
+                <test group="3" method="manual"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/check_DY.cpp" type="cpp.g++"/>
+                <binary path="files/check_DY.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/generator_DY.cpp" type="cpp.g++"/>
+                <binary path="files/generator_DY.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/validator_DY.cpp" type="cpp.g++"/>
+                <binary path="files/validator_DY.exe" type="exe.win32"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker type="testlib">
+            <source path="files/check_DY.cpp" type="cpp.g++"/>
+            <binary path="check.exe" type="exe.win32"/>
+            <copy path="check.cpp" type="cpp.g++"/>
+            <testset>
+                <test-count>3</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests>
+                    <test verdict="ok"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="presentation-error"/>
+                </tests>
+            </testset>
+        </checker>
+        <validators>
+            <validator>
+                <source path="files/validator_DY.cpp" type="cpp.g++"/>
+                <binary path="files/validator_DY.exe" type="exe.win32"/>
+                <testset>
+                    <test-count>4</test-count>
+                    <input-path-pattern>files/tests/validator-tests/%02d</input-path-pattern>
+                    <tests>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                    </tests>
+                </testset>
+            </validator>
+        </validators>
+        <solutions>
+            <solution tag="main">
+                <source path="solutions/ok_1000000_solution_DY.cpp" type="cpp.g++"/>
+                <binary path="solutions/ok_1000000_solution_DY.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="time-limit-exceeded-or-accepted">
+                <source path="solutions/ok_1000_solution_DY.cpp" type="cpp.g++"/>
+                <binary path="solutions/ok_1000_solution_DY.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="time-limit-exceeded-or-accepted">
+                <source path="solutions/ok_100_solution_DY.cpp" type="cpp.g++"/>
+                <binary path="solutions/ok_100_solution_DY.exe" type="exe.win32"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>0</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list/>
+    </stresses>
+    <documents>
+        <document path="documents/description.txt" type="text/plain"/>
+    </documents>
+    <tags>
+        <tag value="realization"/>
+    </tags>
+</problem>

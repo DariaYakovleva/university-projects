@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1400056190 source:/home/daria/Рабочий стол/big_integer/big_integer/main.cpp
+	<iostream>
+	<string>
+	<cstdio>
+	"big_integer.cpp"
+
+1400275718 /home/daria/Рабочий стол/big_integer/big_integer/big_integer.cpp
+	"big_integer.h"
+	<iostream>
+	<cstring>
+	<stdexcept>
+
+1400060074 /home/daria/Рабочий стол/big_integer/big_integer/big_integer.h
+	<iosfwd>
+	<vector>
+
+1400275089 source:/home/daria/Рабочий стол/big_integer/big_integer/big_integer.cpp
+	"big_integer.h"
+	<iostream>
+	<cstring>
+	<stdexcept>
+

@@ -1,0 +1,19 @@
+			S -> D
+
+			D -> TAD
+
+			D -> $\varepsilon$
+
+			A -> ' 'B
+
+			B -> VC
+
+			C -> ,VC
+
+			C -> ;
+
+			V -> *V
+
+			V -> a
+
+			T -> a

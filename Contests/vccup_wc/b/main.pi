@@ -1,0 +1,9 @@
+main =>
+     A = read_line(),
+     N = floor(A.length / 2),
+     foreach(X in 1..N)
+     	printf("%c", A[N - X + 1])
+     end,
+     foreach(Y in 1..N)
+     	printf("%c", A[N*2 - Y + 1])
+     end.

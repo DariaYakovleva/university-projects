@@ -1,0 +1,16 @@
+main =>
+     A = read_int(),
+     B = read_int(),
+     C = read_int(),
+     D = B * B - 4 * A * C,
+     if D == 0 then 
+     	printf("%.5f", -B / (2 * A))
+     else
+     	X1 = (-B - sqrt(D)) / (2 * A),
+     	X2 = (-B + sqrt(D)) / (2 * A),
+     	if X1 < X2 then
+     		printf("%.5f %.5f", X1, X2)
+     	else
+     		printf("%.5f %.5f", X2, X1)
+        end	
+     end.

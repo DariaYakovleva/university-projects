@@ -1,0 +1,24 @@
+<html><head></head><body>
+<pre id="out"></pre>
+<script>
+    // Helper functions
+    function escape(str) {
+        return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') ;
+    }
+
+    var logArea = document.getElementById("out");
+    function println(message) {
+        if (arguments.length != 0) {
+            print(message);
+        }
+        print("\n");
+    }
+
+    function print(message) {
+        if (arguments.length != 0) {
+            logArea.innerHTML += escape("" + message);
+        }
+    }
+</script>
+<script src="eval.js" charset="UTF-8"></script>
+</body></html>

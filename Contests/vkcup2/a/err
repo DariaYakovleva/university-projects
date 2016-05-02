@@ -1,0 +1,40 @@
+main.cpp: In function 'int main()':
+main.cpp:23:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   for (int j = 0; j < id.size(); j++) {
+                               ^
+main.cpp:42:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for (int i = 0; i < id.size(); i++) {
+                              ^
+main.cpp:44:8: error: 'template<class _Key, class _Compare, class _Alloc> class std::set' used without template parameters
+   for (set::iterator it = friens[i].begin(); it != friends[i].end(); ++it) {
+        ^
+main.cpp:44:22: error: expected ';' before 'it'
+   for (set::iterator it = friens[i].begin(); it != friends[i].end(); ++it) {
+                      ^
+main.cpp:44:46: error: 'it' was not declared in this scope
+   for (set::iterator it = friens[i].begin(); it != friends[i].end(); ++it) {
+                                              ^
+main.cpp:47:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for (int j = 0; j < id.size(); j++) {
+                                ^
+main.cpp:53:9: error: 'template<class _Key, class _Compare, class _Alloc> class std::set' used without template parameters
+    for (set::iterator it2 = friens[pos].begin(); it2 != friends[pos].end(); ++it2) {
+         ^
+main.cpp:53:23: error: expected ';' before 'it2'
+    for (set::iterator it2 = friens[pos].begin(); it2 != friends[pos].end(); ++it2) {
+                       ^
+main.cpp:53:50: error: 'it2' was not declared in this scope
+    for (set::iterator it2 = friens[pos].begin(); it2 != friends[pos].end(); ++it2) {
+                                                  ^
+main.cpp:57:35: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+      for (int k = 0; k < ans.size(); k++) {
+                                   ^
+main.cpp:69:33: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for (int j = 0; j < ans.size(); j++) {
+                                 ^
+main.cpp:70:51: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if (ans[j].second * 100 > friends[i].size() * k) ans2.push_back(ans[j].first);
+                                                   ^
+main.cpp:73:34: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for (int j = 0; j < ans2.size(); j++) {
+                                  ^

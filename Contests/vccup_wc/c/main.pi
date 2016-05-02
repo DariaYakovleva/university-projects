@@ -1,0 +1,20 @@
+main =>
+     A = read_int(),
+     B = read_int(),
+     C = read_int(),
+     X = new_array(1000),
+     Y = new_array(1000),
+     CNT = 1,
+     foreach(X1 in 1..C)
+	     foreach(Y1 in 1..C)
+    	 	if (X1 * A + Y1 * B) == C then
+    	 		X[CNT] = X1,
+    	 		Y[CNT] = Y1,
+    	 		CNT := CNT + 1
+    	 	end
+    	 end
+     end,
+     printf("%d\n", CNT - 1),
+     foreach(I in 1..CNT - 1)
+     	printf("%d %d\n", X[I], Y[I])
+     end.

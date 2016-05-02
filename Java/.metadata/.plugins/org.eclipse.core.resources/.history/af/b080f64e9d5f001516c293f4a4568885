@@ -1,0 +1,16 @@
+package homework7;
+
+public class Pair {
+	public Const a;
+	public Expression b;
+	Pair(Const a, Expression b) {
+		this.a = a;
+		this.b = b;
+	}
+	public Const cnst() {
+		return a;
+	}
+	public Expression exp() {
+		return b;
+	}
+}

@@ -1,0 +1,3 @@
+Main-class: Implementor 
+Class-Path: java-advanced-2015/artifacts/ImplementorTest.jar java-advanced-2015/lib/*
+	

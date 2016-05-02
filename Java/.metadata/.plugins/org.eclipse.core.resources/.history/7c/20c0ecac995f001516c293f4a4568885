@@ -1,0 +1,91 @@
+package homework7;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Polinom implements Expression{
+	public List<Pair> polinom;
+	public Const p;
+	
+	public Polinom() {
+		polinom = new ArrayList<Pair>();
+		p = null;
+	}
+	
+	public Polinom(List<Expression> a, List<Const> b, Const p) {
+		polinom = new ArrayList<Pair>();
+		for (int i = 0; i < a.size(); i++) {
+			polinom.add(new Pair(b.get(i), a.get(i)));
+		}
+		this.p = p;
+	}
+	
+	List<Pair> getPolinom() {
+		return polinom;
+	}
+	
+	List<Const> getP() {
+		return p;
+	}
+	
+	int size() {
+		return polinom.size();
+	}
+	
+	void push(Expression power, Const mult) {
+		polinom.add(new Pair(mult, power));
+	}
+	
+	public int compare(Expression b) {
+		if (!(b instanceof Polinom)) {
+			return 1;
+		}
+		Polinom c = (Polinom)b;
+		List<Expression> bp = c.getPowers();
+		List<Const> bm = c.getMults();
+		for (int i = 0; i < Integer.min(powers.size(), bp.size()); i++) {
+			int p = powers.get(i).compare(bp.get(i));
+			if (p == 0) {
+				int m = mults.get(i).compare(bm.get(i));
+				if (m != 0) {
+					return m;
+				}
+			} else {
+				return p;
+			}
+		}
+		if (powers.size() > bp.size()) {
+			return 1;
+		}
+		if (powers.size() < bp.size()) {
+			return -1;
+		}
+		return 0;
+	}
+
+	@Override
+	public Polinom evaluate() {
+		return new Polinom(polinom);
+	}
+
+	@Override
+	public String printExp() {
+		String res = "";
+		for (int i = polinom.size() - 1; i >= 0; i--) {
+			res += "(" + polinom.get(i).first().printExp() + ") * w ^ (" + polinom.get(i).second().printExp() + ") ";
+			if (i > 0) res += "+ ";
+		}
+		return res;
+	}
+	
+	public void sort() {
+		for (int i = 0; i < polinom.size(); i++) {
+			for (int j = polinom.size() - 1; j > i; j--) {
+				if (polinom.get(j).second().compare(polinom.get(j - 1).second()) < 0) {
+					Collections.swap(polinom, j, j - 1);
+				}
+			}
+		}
+	}
+}

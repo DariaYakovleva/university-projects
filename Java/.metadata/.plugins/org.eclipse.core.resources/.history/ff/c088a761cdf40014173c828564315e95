@@ -1,0 +1,104 @@
+import info.kgeorgiy.java.advanced.hello.HelloServer;
+
+import java.io.UnsupportedEncodingException;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.nio.charset.Charset;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+
+public class HelloUDPServer {//implements HelloServer{
+	Map<Integer, MyServer> ports = new ConcurrentHashMap<>();
+
+	public HelloUDPServer() {}
+//	@Override
+	public void start(int port, int threads) {
+		if (ports.containsKey(port)) return;
+		ports.put(port, new MyServer(port, false, threads));
+		Thread[] serverThreads = ports.get(port).serverThreads;
+		HelloConnection server = ports.get(port).server;
+		if (server.socket == null) {
+			System.err.println("Can't create server because socket hasn't been created");
+			return;
+		}
+		AtomicBoolean work = ports.get(port).work;
+		for (int i = 0; i < serverThreads.length; i++) {
+			serverThreads[i] = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					while (work.get()) {
+						DatagramPacket rPacket;	
+						synchronized (server) {
+							rPacket = server.receivePacket();
+						}
+						if (rPacket != null) {
+							String message = new String(rPacket.getData(), rPacket.getOffset(), 
+									rPacket.getLength(), Charset.forName("UTF-8"));
+							String reply1 = "Hello, " + message;
+							String reply;
+							try {
+								reply = new String(reply1.getBytes("UTF-8"), Charset.forName("UTF-8"));
+							
+							System.out.println(reply);
+							} catch (UnsupportedEncodingException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							server.sendMessage(rPacket.getPort(), rPacket.getAddress(), reply);
+//							System.out.println("send " + rPacket.getPort() + " " + rPacket.getAddress() + message);
+						}
+					}
+				}
+			});
+			serverThreads[i].start();
+		}
+		work.set(true);
+	}
+//	@Override
+	public void close() {
+		for (Integer port : ports.keySet()) {
+			Thread[] serverThreads = ports.get(port).serverThreads;
+			HelloConnection server = ports.get(port).server;
+			AtomicBoolean work = ports.get(port).work;
+			if (!work.get()) return;
+			server.close();
+			for (int i = 0; i < serverThreads.length; i++) {
+				serverThreads[i].interrupt();
+			}
+			work.set(false);
+		}
+		ports.clear();
+	}
+
+	public static void main(String[] args) {
+		if (args.length < 2) {
+			System.err.println("I want more parameters: port, count of threads");
+			return;
+		}
+		int curPort = Integer.parseInt(args[0]);
+		int maxThreads = Integer.parseInt(args[1]);
+		HelloUDPServer myServer = new HelloUDPServer();
+		try {
+			System.out.println(InetAddress.getLocalHost().getHostName() + " " + InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			System.err.println("Unknown host name");
+		}
+		myServer.start(curPort, maxThreads);
+//		myServer.close();
+	}
+
+	private class MyServer {
+		public HelloConnection server;
+		public AtomicBoolean work = new AtomicBoolean();
+		public Thread serverThreads[];
+		MyServer(int port, boolean work, int threads) {
+			this.server = new HelloConnection(port);
+			this.work = new AtomicBoolean(false);
+			this.serverThreads = new Thread[threads];
+		}
+
+	}
+}

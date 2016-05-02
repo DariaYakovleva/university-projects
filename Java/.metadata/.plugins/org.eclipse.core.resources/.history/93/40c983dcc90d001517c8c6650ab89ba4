@@ -1,0 +1,14 @@
+
+public class Lambda implements Expression {
+  
+	Expression e1;
+	Expression e2;
+    public Lambda(Expression e1, Expression e2) {
+    	this.e1 = e1;
+    	this.e2 = e2;
+    }
+    
+    public String printExp() {
+		return "(\\" + e1.printExp() + ". " + e2.printExp() + ")";
+	} 
+}

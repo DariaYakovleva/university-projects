@@ -1,0 +1,53 @@
+package homework7;
+
+
+public class Summand implements Expression {
+	Expression e1;
+	Expression e2;
+	public Summand(Expression e1, Expression e2) {
+		this.e1 = e1;
+		this.e2 = e2;
+	}
+	
+	public Polinom evaluate() {
+		Polinom a = e1.evaluate();
+		Polinom b = e2.evaluate();
+		Polinom res = new Polinom();
+		int pa = 0;
+		int pb = 0;
+		for (int i = 0; i < a.size() + b.size(); i++) {
+			if (pa < a.size() && pb < b.size()) {
+				int p = a.powers.get(pa).compare(b.powers.get(pb));
+				if (p == 0) {
+					res.push(a.powers.get(pa), new Const(a.mults.get(pa).getValue() + b.mults.get(pb).getValue()));
+					pa++;
+					pb++;
+				} else if (p == 1) {
+					res.push(a.powers.get(pa), a.mults.get(pa));
+					pa++;
+				} else {
+					res.push(b.powers.get(pb), b.mults.get(pb));
+					pb++;
+				}
+			} else if (pa < a.size()) {
+				res.push(a.powers.get(pa), a.mults.get(pa));
+				pa++;
+			} else {
+				res.push(b.powers.get(pb), b.mults.get(pb));
+				pb++;
+			}
+		}
+		return res;
+	}
+
+	public int compare(Expression b) {
+		Polinom a = evaluate();
+		Polinom bb = evaluate();
+		return a.compare(bb);
+	}
+	
+	public String printExp() {
+		return "(" + e1.printExp() + "+" + e2.printExp() + ")";
+	}
+
+}

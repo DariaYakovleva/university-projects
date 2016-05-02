@@ -1,0 +1,135 @@
+	package homework7;
+
+import java.util.ArrayList;
+
+public class Power implements Expression {
+	Expression e1;
+	Expression e2;
+	public Power(Expression e1, Expression e2) {
+		this.e1 = e1;
+		this.e2 = e2;
+	}
+	
+	public Polinom evaluate() {
+		Polinom a = e1.evaluate();
+		Polinom b = e2.evaluate();
+		if (b.isZero() || (a.isAtom() && a.p.x == 1)) {
+			return new Polinom(new ArrayList<Mpair>(), new Const(1));
+		}
+		if (a.isZero()) {
+			return new Polinom(new ArrayList<Mpair>(), new Const(0));
+		}
+		if (b.isAtom() && a.isAtom()) {
+			return new Polinom(new ArrayList<Mpair>(), new Const(pow(a.p.x, b.p.x)));
+		}
+		if (a.isAtom()) {
+			return exp1(a, b);
+		}
+		if (b.isAtom()) {
+			return exp3(a, b);
+		}
+		return exp4(a, b);
+	}
+
+	public int compare(Expression b) {
+		Polinom a = evaluate();
+		Polinom bb = b.evaluate();
+		return a.compare(bb);
+	}
+	
+	public String printExp() {
+		return "(" + e1.printExp() + "^" + e2.printExp() + ")";
+	}
+	
+	Integer pow(Integer a, Integer b) {
+		Integer res = 1;
+		for (int i = 0; i < b; i++) {
+			res *= a;
+		}
+		return res;
+	}
+	
+	Polinom exp1(Polinom a, Polinom b) {
+		Polinom p = new Polinom();
+		if (b.getExp().compare(new Const(1)) == 0) {
+			p.push(new Power(a, b.rest()), b.getCnst());
+			return p;
+		}
+		Polinom p1 = new Polinom();
+		if (b.rest().isAtom()) {
+			p1.push(new Subtract(b.getExp(), new Const(1)), b.getCnst());
+			p.push(p1, new Const(pow(a.p.x, b.rest().p.x)));
+			return p;
+		}
+		Polinom c = exp1(a, b.rest());
+		p1.push(new Subtract(b.getExp(), new Const(1)), new Const(1));
+		p.push(p1.add(c.getExp().evaluate()), c.getCnst());
+		return p;
+	}
+	
+	Polinom exp2(Polinom a, Polinom b) {
+		if (b.p.x == 1) {
+			return a;
+		}
+		Polinom b1 = new Polinom(new ArrayList<Mpair>(), new Const(b.p.x - 1));
+		Polinom p = new Polinom();
+		p.push(new Multiplier(a.getExp(), b1), new Const(1));
+		return (new Multiplier(p, a)).evaluate();
+		
+	}
+	
+	boolean limittp(Polinom a) {
+		if (a.isAtom()) {
+			return a.isZero();
+		}
+		return limittp(a.rest());
+	}
+	
+	Polinom limitpart(Polinom a) {
+		if (a.isAtom()) {
+			return (new Const(0)).evaluate();
+		}
+		return a.first().add(limitpart(a.rest()));
+	}
+	
+	Polinom natpart(Polinom a) {
+		if (a.isAtom()) {
+			return a;
+		}
+		return natpart(a.rest());
+	}
+	
+	Polinom padd(Polinom a, Polinom b, int n) {
+		return a.firstn(n).append((new Summand(a.restn(n), b).evaluate()));
+	}
+	
+	Polinom helper_exp3(Polinom a, Polinom p, int n, Polinom q) {
+		if (q.isZero()) {
+			return p;
+		}
+		return padd((new Multiplier(exp2(a, q), p)).evaluate(), helper_exp3(a, p, n, (new Const(q.p.x - 1)).evaluate()), n);
+	}
+	
+	Polinom exp3(Polinom a, Polinom b) {
+//		Polinom p = new Polinom();
+		if (b.isZero()) {
+			return (new Const(1)).evaluate();
+		}
+		if (b.size() == 0 && b.p.x == 1) {
+			return new Polinom(a);
+		}
+		if (limittp(a)) {
+			return exp2(a, b);
+		}
+		Polinom c = limitpart(a);
+		int n = a.size();
+		return padd(exp2(c, b).firstn(n), helper_exp3(c, natpart(a), n, (new Const(b.p.x - 1)).evaluate()), n);
+	}
+
+	Polinom exp4(Polinom a, Polinom b) {
+		Polinom b1 = exp3(a, natpart(b));
+		Polinom a1 = new Polinom(new ArrayList<Mpair>(), new Const(0));
+		a1.push(new Multiplier(a.getExp(), limitpart(b)), new Const(1));
+		return (new Multiplier(a1, b1)).evaluate();
+	}
+}

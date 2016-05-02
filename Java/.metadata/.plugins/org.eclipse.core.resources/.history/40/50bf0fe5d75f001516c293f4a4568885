@@ -1,0 +1,40 @@
+package homework7;
+
+import java.util.ArrayList;
+
+
+public class Multiplier implements Expression {
+	Expression e1;
+	Expression e2;
+	public Multiplier(Expression e1, Expression e2) {
+		this.e1 = e1;
+		this.e2 = e2;
+	}
+
+	public Polinom evaluate() {
+		Polinom a = e1.evaluate();
+		Polinom b = e2.evaluate();
+		if (a.isZero() || b.isZero()) return new Polinom(new ArrayList<Pair>(), new Const(0));
+		if (a.isAtom() && b.isAtom()) {
+			return new Polinom(new ArrayList<Pair>(), new Const(a.p.x * b.p.x));
+		}
+		Polinom p = new Polinom();
+		if (b.isAtom()) {
+			p.push(a.getExp(), new Const(a.getCnst().x * b.p.x));
+			return p.add(a.rest());
+		}
+		p.push(new Summand(a.getExp(), b.getExp()).evaluate(), b.getCnst());
+		return p.add((new Multiplier(a, b.rest())).evaluate());
+	}
+
+	public int compare(Expression b) {
+		Polinom a = evaluate();
+		Polinom bb = evaluate();
+		return a.compare(bb);
+	}
+
+	public String printExp() {
+		return "(" + e1.printExp() + "*" + e2.printExp() + ")";
+	}
+
+}

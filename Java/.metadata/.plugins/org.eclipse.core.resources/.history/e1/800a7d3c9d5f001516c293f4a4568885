@@ -1,0 +1,93 @@
+package homework7;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Polinom implements Expression{
+	public List<Pair> polinom;
+	public Const p;
+	
+	public Polinom() {
+		polinom = new ArrayList<Pair>();
+		p = null;
+	}
+	
+	public Polinom(List<Expression> a, List<Const> b, Const p) {
+		polinom = new ArrayList<Pair>();
+		for (int i = 0; i < a.size(); i++) {
+			polinom.add(new Pair(b.get(i), a.get(i)));
+		}
+		this.p = p;
+	}
+	
+	public Polinom(Polinom a) {
+		this.p = a.getP();
+		List<Pair> lst = a.getPolinom();
+		for (Pair x: lst) {
+			polinom.add(new Pair(x.first(), x.second()));
+		}
+	}
+	
+	List<Pair> getPolinom() {
+		return polinom;
+	}
+	
+	Const getP() {
+		return p;
+	}
+	
+	int size() {
+		return polinom.size();
+	}
+	
+	void push(Expression power, Const mult) {
+		polinom.add(new Pair(mult, power));
+	}
+	
+	public int compare(Expression b) {
+		if (!(b instanceof Polinom)) {
+			return 1;
+		}
+		Polinom c = (Polinom)b;
+		if (isAtom() && c.isAtom()) {
+			return p.compare(c.getP());
+		}
+		if (isAtom()) return -1;
+		if (c.isAtom()) return 1;
+		if (polinom.get(0).exp().compare(c.getPolinom().get(0).exp()) == 0) 
+			return polinom.get(0).cnst().compare(c.getPolinom().get(0).cnst()); 
+	}
+
+	public boolean isAtom() {
+		if (polinom.isEmpty() && p != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public Polinom evaluate() {
+		return new Polinom(this);
+	}
+
+	@Override
+	public String printExp() {
+		String res = "";
+		for (int i = polinom.size() - 1; i >= 0; i--) {
+			res += "(" + polinom.get(i).cnst().printExp() + ") * w ^ (" + polinom.get(i).exp().printExp() + ") ";
+			if (i > 0) res += "+ ";
+		}
+		return res;
+	}
+	
+	public void sort() {
+		for (int i = 0; i < polinom.size(); i++) {
+			for (int j = polinom.size() - 1; j > i; j--) {
+				if (polinom.get(j).exp().compare(polinom.get(j - 1).exp()) < 0) {
+					Collections.swap(polinom, j, j - 1);
+				}
+			}
+		}
+	}
+}

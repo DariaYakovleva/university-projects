@@ -1,0 +1,90 @@
+test 1
+start init 8
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
+test 2
+start init 9
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
+test 3
+start init 13
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
+test 4
+start init 11
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
+test 5
+start init 9
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
+test 6
+start init 8
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
+test 7
+start init 10
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
+test 8
+start init 12
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
+test 9
+start init 12
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
+test 10
+start init 12
+init0
+arrs
+go bfs 
+go dp 
+!!!
+go go 
+strart go
