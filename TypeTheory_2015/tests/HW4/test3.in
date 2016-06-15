@@ -1,0 +1,13 @@
+(\f.\x.f (f x)) (\f.\x.f (f x)) (\f.\x.f (f x))
+
+(\x.(\x.((x (x x)) ((x (x x)) (x (x x)))))) (\f.\x.f (f x)) 
+
+(\f.\x.f (f x)) (\f.\x.f (f x)) 
+
+(\f.\x.f (f x))
+
+
+
+\x. \y. (x y)
+(\f.\x. (f x)) (\g.\y. (g y))
+(\f.\x. (f x)) (\f.\x. (f x)) 

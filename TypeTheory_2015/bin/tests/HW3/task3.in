@@ -1,0 +1,3 @@
+(\y.(\y. x y)) (x y) [y := a]
+\y.(\y. x y) (x y) [y := a]
+\y.(\y. x y) (x y) [x := a]

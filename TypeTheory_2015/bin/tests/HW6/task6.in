@@ -1,0 +1,7 @@
+(\f.\x. (f x)) (\f.\x. (f x)) 
+(\f.\x. (f x)) (\g.\y. (g y)) 
+\x. \y. (x y)
+\x.\y.x y
+
+(\x. x x)(\x. x x)
+(\x.x) y
