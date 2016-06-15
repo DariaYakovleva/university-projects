@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FileManagerApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_file">FileActivity</string>
+    <string name="no_activity_found_to_handle">No activity found to handle the intent</string>
+    <string name="items_count">%d item(s)</string>
+</resources>

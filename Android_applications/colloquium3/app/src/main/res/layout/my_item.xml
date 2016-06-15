@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="30">
+
+    <TextView
+        android:id="@+id/cur"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:autoLink="web"
+        android:text="Currency"
+        android:textSize="18dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/valueCur"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:textSize="24dp"
+        android:text="Value"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</LinearLayout>

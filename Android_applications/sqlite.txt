@@ -1,0 +1,51 @@
+PRAGMA foreign_keys = ON
+create table A (_id Integer, name TEXT)
+insert into A values (1, "hello")
+select * from A
+.mode column
+drop table A
+_id Integer PRIMARY KEY
+altep table A drop column _id;
+alter table A add column supercolumn integer;
+select name, found//this is projector// from ARTIST where found > 1550;
+create table A(... , foreign key(_artist_id) references artist(_id));
+select * from album, artist;
+select * from album join artist on album artust_id = artist_id;
+select artist_id, count(_id) from album group by artist_id;
+select art.name, count(alb._id) as c from albums  all
+join artist as
+ art on alb.artist_id = artist.id group by art.id having alb.year > 2000
+where c > 2;
+select ..... having count(*) > 2 
+
+limit
+order by as/desc
+
+select artist.name, album.name, from
+	artist left outer join album on
+	artist._id = album.artist_id;
+
+update artist set name = ".."
+		where _id = 10;
+
+delete artist where ..;
+add column some integer unique;
+add column ble textnot null;
+у лукоморья дуб зеленый  златая цепь на дубе топ и днем и ночью кот учыный все ходит по цепи кругом идет направо песнь заводит налево сказку говорит там чудеса там леший бродит русалка на ветвях сидит там на неведомых дорожках следы невиданных зверей
+
+content provider
+SharedPreferences
+
+context.getCacheDir();
+Enviroment.getExternalDir();
+ContentProviders
+
+content://my.application/data
+
+
+
+
+
+
+
+
