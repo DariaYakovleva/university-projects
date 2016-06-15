@@ -1,0 +1,11 @@
+exp: t exp1;
+exp1: PLUS t exp1 | EPS;
+t: f t1;
+t1: MUL f t1 | EPS;
+f: NUM | LB exp RB;
+LB: '(';
+RB: ')';
+PLUS: '+';
+MUL: '*';
+NUM: 'n';
+EPS: '';

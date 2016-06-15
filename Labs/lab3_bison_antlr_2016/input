@@ -58,4 +58,75 @@ print(sqr)
 
 
 
+a = read_int()
+b = read_int()
+c = read_int()
+d = read_int()
+f = read_float()
+s = read_float()
+a, b = b, a
+c, d = d, c
+s, f = f, s
+do {
+	print(a)
+} while (a < 1)
 
+
+int a;
+
+int b;
+
+int c;
+
+int d;
+
+float f;
+
+float s;
+
+int main() {
+scanf("%d", &a);
+scanf("%d", &b);
+scanf("%d", &c);
+scanf("%d", &d);
+scanf("%f", &f);
+scanf("%f", &s);
+int tmpint = a;
+a = b;
+b = tmpint;
+c = d;
+d = tmpint;
+float tmpfloat = s;
+s = f;
+f = tmpfloat;
+do {
+printf("%d ", a);
+} while (a<1);
+}
+
+
+
+
+
+
+
+int a;
+
+int b;
+
+int c;
+
+int d;
+
+int main() {
+scanf("%d", &a);
+scanf("%d", &b);
+scanf("%d", &c);
+scanf("%d", &d);
+int tmp = a;
+a = b;
+b = tmp;
+int tmp = c;
+c = d;
+d = tmp;
+}

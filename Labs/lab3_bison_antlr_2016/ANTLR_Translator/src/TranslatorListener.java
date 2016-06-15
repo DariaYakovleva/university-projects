@@ -91,6 +91,16 @@ public interface TranslatorListener extends ParseTreeListener {
 	 */
 	void exitWhileStatement(TranslatorParser.WhileStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TranslatorParser#doWhileStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDoWhileStatement(TranslatorParser.DoWhileStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TranslatorParser#doWhileStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDoWhileStatement(TranslatorParser.DoWhileStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TranslatorParser#forStatement}.
 	 * @param ctx the parse tree
 	 */

@@ -39,6 +39,9 @@ command
 	| whileStatement {
 		$res = $whileStatement.res;
 	}
+	| doWhileStatement {
+		$res = $doWhileStatement.res;
+	}
 	| swap {
 		$res = $swap.res;
 	}
@@ -106,9 +109,12 @@ swap
 	: op1 = var['d'] ',' op2 = var['d'] '='  var['d'] ',' var['d'] {
 		$tt = $op1.tt;
 		$res = "";
-		$res += $tt + " tmp = " + $op1.text + ";\n";
+		if (!memory.containsKey("tmp" + $tt)) {
+			$res += $tt + " tmp" + $tt + " = " + $op1.text + ";\n";
+			memory.put("tmp" + $tt, $op1.t);
+		}
 		$res += $op1.text + " = " + $op2.text  + ";\n";
-		$res += $op2.text + " = tmp" + ";\n";
+		$res += $op2.text + " = tmp" + $tt + ";\n";
 	}
 	;
 
@@ -159,6 +165,22 @@ whileStatement
     }
 	: 'while' '(' logicExpr ')' '{' (command {$while1 += $command.res;})+ '}' {
 		$res = "while (" + $logicExpr.text + ") {\n";
+	}
+	;
+
+
+doWhileStatement
+	returns[String res]
+	locals [String dwhile1]
+    @init {
+    	$res = "";
+    	$dwhile1 = "";
+    }
+    @after{
+        $res = "do {\n" + $dwhile1 + "} " + $res;
+    }
+	: 'do' '{' (command {$dwhile1 += $command.res;})+ '}' 'while' '(' logicExpr ')' {
+		$res = "while (" + $logicExpr.text + ");\n";
 	}
 	;
 

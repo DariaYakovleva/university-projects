@@ -1,0 +1,10 @@
+ADD: '+';
+SUB: '-';
+MUL: '*';
+DIV: '/';
+INT: [0-9]+;
+UN: '_';
+LB: '(';
+RB: ')';
+EVAL: 'evaluate';
+EPS: '';
