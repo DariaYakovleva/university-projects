@@ -1,0 +1,62 @@
+main.cpp: In function 'void z_fun()':
+main.cpp:25:9: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i <= r) {
+         ^
+main.cpp:26:36: error: no matching function for call to 'min(int&, size_t)'
+    zf[i] = min(zf[i - l], r - i + 1);
+                                    ^
+In file included from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/char_traits.h:39:0,
+                 from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/ios:40,
+                 from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/ostream:38,
+                 from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/iostream:39,
+                 from main.cpp:1:
+D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/stl_algobase.h:195:5: note: candidate: template<class _Tp> const _Tp& std::min(const _Tp&, const _Tp&)
+     min(const _Tp& __a, const _Tp& __b)
+     ^
+D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/stl_algobase.h:195:5: note:   template argument deduction/substitution failed:
+main.cpp:26:36: note:   deduced conflicting types for parameter 'const _Tp' ('int' and 'size_t {aka long long unsigned int}')
+    zf[i] = min(zf[i - l], r - i + 1);
+                                    ^
+In file included from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/char_traits.h:39:0,
+                 from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/ios:40,
+                 from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/ostream:38,
+                 from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/iostream:39,
+                 from main.cpp:1:
+D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/stl_algobase.h:243:5: note: candidate: template<class _Tp, class _Compare> const _Tp& std::min(const _Tp&, const _Tp&, _Compare)
+     min(const _Tp& __a, const _Tp& __b, _Compare __comp)
+     ^
+D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/stl_algobase.h:243:5: note:   template argument deduction/substitution failed:
+main.cpp:26:36: note:   deduced conflicting types for parameter 'const _Tp' ('int' and 'size_t {aka long long unsigned int}')
+    zf[i] = min(zf[i - l], r - i + 1);
+                                    ^
+In file included from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/algorithm:62:0,
+                 from main.cpp:6:
+D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/stl_algo.h:3445:5: note: candidate: template<class _Tp> _Tp std::min(std::initializer_list<_Tp>)
+     min(initializer_list<_Tp> __l)
+     ^
+D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/stl_algo.h:3445:5: note:   template argument deduction/substitution failed:
+main.cpp:26:36: note:   mismatched types 'std::initializer_list<_Tp>' and 'int'
+    zf[i] = min(zf[i - l], r - i + 1);
+                                    ^
+In file included from D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/algorithm:62:0,
+                 from main.cpp:6:
+D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/stl_algo.h:3451:5: note: candidate: template<class _Tp, class _Compare> _Tp std::min(std::initializer_list<_Tp>, _Compare)
+     min(initializer_list<_Tp> __l, _Compare __comp)
+     ^
+D:/Users/Daria/Documents/7.10.3/mingw/include/c++/5.2.0/bits/stl_algo.h:3451:5: note:   template argument deduction/substitution failed:
+main.cpp:26:36: note:   mismatched types 'std::initializer_list<_Tp>' and 'int'
+    zf[i] = min(zf[i - l], r - i + 1);
+                                    ^
+main.cpp:29:17: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i + zf[i] > r) {
+                 ^
+main.cpp: In function 'int main()':
+main.cpp:46:7: error: 'z' was not declared in this scope
+   if (z[i] == 0) continue;
+       ^
+main.cpp:47:17: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+   if (i + zf[i] < last) {
+                 ^
+main.cpp:58:11: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  if (last != t.size() + 1) ok = false;
+           ^

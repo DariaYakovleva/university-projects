@@ -13,6 +13,7 @@ public class Main {
     static int[] prevProb = new int[1000];
     static String[] names = new String[1000];
     static int TEAM_COUNT = 200;
+
     static void init() throws FileNotFoundException {
         File current = new File("current.txt");
         PrintWriter out = new PrintWriter(current);
