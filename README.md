@@ -1,1 +1,1 @@
-created by DariaYakovleva
+## University courses, contests and labs
